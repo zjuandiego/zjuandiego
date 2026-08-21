@@ -9,44 +9,16 @@
   "footerName": "Juan Jaramillo",
   "formEndpoint": "https://formspree.io/f/xnpawopr",
   "skills": [
-    {
-      "name": "After Effects",
-      "val": "Expresiones · Rigging"
-    },
-    {
-      "name": "Motion UI",
-      "val": "Microinteracciones"
-    },
-    {
-      "name": "Dirección de arte",
-      "val": "Marca · Storyboard"
-    },
-    {
-      "name": "Herramientas",
-      "val": "Illustrator · Premiere"
-    }
+    { "name": "After Effects", "val": "Expresiones · Rigging" },
+    { "name": "Motion UI", "val": "Microinteracciones" },
+    { "name": "Dirección de arte", "val": "Marca · Storyboard" },
+    { "name": "Herramientas", "val": "Illustrator · Premiere" }
   ],
   "contact": [
-    {
-      "k": "Email",
-      "v": "tucorreo@ejemplo.com",
-      "link": "mailto:tucorreo@ejemplo.com"
-    },
-    {
-      "k": "Instagram",
-      "v": "@tuusuario",
-      "link": "https://instagram.com/"
-    },
-    {
-      "k": "Behance",
-      "v": "behance.net/tuusuario",
-      "link": "https://behance.net/"
-    },
-    {
-      "k": "WhatsApp",
-      "v": "+57 300 000 0000",
-      "link": "https://wa.me/573000000000"
-    }
+    { "k": "Email", "v": "PON-AQUI-TU-CORREO@ejemplo.com", "link": "mailto:PON-AQUI-TU-CORREO@ejemplo.com" },
+    { "k": "Instagram", "v": "@tuusuario", "link": "https://instagram.com/" },
+    { "k": "Behance", "v": "behance.net/tuusuario", "link": "https://behance.net/" },
+    { "k": "WhatsApp", "v": "+57 300 000 0000", "link": "https://wa.me/573000000000" }
   ],
   "projects": [
     {
