@@ -39,6 +39,16 @@
       "video": "",
       "link": "",
       "desc": "Video explicativo con assets SVG animados en After Effects y capas de profundidad parallax."
+    },
+    {
+      "id": "p3",
+      "title": "Motion graphics y frustración digital en UX",
+      "cat": "Investigación · UI Motion",
+      "tc": "2026",
+      "img": "",
+      "video": "",
+      "link": "",
+      "desc": "Investigación académica sobre cómo la animación de microinteracciones y transiciones de estado reduce la fricción percibida en interfaces digitales."
     }
   ]
 }
