@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Diseño con movimiento, historias con propósito.",
+    "subtitle": "Soy diseñador gráfico y productor multimedia especializado en motion graphics con After Effects: animación de interfaces, rigs con expresiones y piezas de marca que se sienten vivas."
+  },
+  "about": {
+    "text": "Llevo más de tres años trabajando como freelance en motion graphics, con foco en animación de UI, expresiones avanzadas y rigging por controladores. También he trabajado en proyectos de agencia simulada, liderando la parte de diseño multimedia: logos animados, cortinillas y piezas para TV."
+  },
+  "footerName": "Tu Nombre",
+  "skills": [
+    { "name": "After Effects", "val": "Expresiones · Rigging" },
+    { "name": "Motion UI", "val": "Microinteracciones" },
+    { "name": "Dirección de arte", "val": "Marca · Storyboard" },
+    { "name": "Herramientas", "val": "Illustrator · Premiere" }
+  ],
+  "contact": [
+    { "k": "Email", "v": "tucorreo@ejemplo.com", "link": "mailto:tucorreo@ejemplo.com" },
+    { "k": "Instagram", "v": "@tuusuario", "link": "https://instagram.com/" },
+    { "k": "Behance", "v": "behance.net/tuusuario", "link": "https://behance.net/" },
+    { "k": "WhatsApp", "v": "+57 300 000 0000", "link": "https://wa.me/573000000000" }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "title": "Logo animado — Folder House",
+      "cat": "Branding · Motion",
+      "tc": "2026",
+      "img": "",
+      "video": "",
+      "link": "",
+      "desc": "Concepto de animación de logotipo para agencia estudiantil, con storyboard de cámara continua."
+    },
+    {
+      "id": "p2",
+      "title": "Explicativo Mercado Libre",
+      "cat": "Explainer · UI Motion",
+      "tc": "00:45",
+      "img": "",
+      "video": "",
+      "link": "",
+      "desc": "Video explicativo con assets SVG animados en After Effects y capas de profundidad parallax."
+    }
+  ]
+}
