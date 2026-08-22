@@ -79,11 +79,6 @@
   ],
   "contact": [
     {
-      "k": "Email",
-      "v": "juandiego3870@gmail.com",
-      "link": "mailto:juandiego3870@gmail.com"
-    },
-    {
       "k": "Instagram",
       "v": "@tuusuario",
       "link": "https://instagram.com/"
@@ -92,11 +87,6 @@
       "k": "Behance",
       "v": "behance.net/tuusuario",
       "link": "https://behance.net/"
-    },
-    {
-      "k": "WhatsApp",
-      "v": "+57 319 235 7123",
-      "link": "https://wa.me/573192357123"
     }
   ],
   "projects": [
