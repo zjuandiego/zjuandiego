@@ -10,28 +10,84 @@
   "formEndpoint": "https://formspree.io/f/xnpawopr",
   "cvUrl": "",
   "services": [
-    { "title": "Motion Graphics", "desc": "Animación de piezas de marca, spots y contenido para redes con ritmo y storytelling visual.", "icon": "reel" },
-    { "title": "Motion UI", "desc": "Microinteracciones y transiciones de interfaz que hacen sentir un producto vivo y pulido.", "icon": "cursor" },
-    { "title": "Identidad animada", "desc": "Logos animados, cortinillas y sistemas de marca en movimiento, listos para cualquier plataforma.", "icon": "spark" },
-    { "title": "Modelado 3D", "desc": "Objetos y escenas en Blender para piezas publicitarias con volumen y textura real.", "icon": "cube" }
+    {
+      "title": "Motion Graphics",
+      "desc": "Animación de piezas de marca, spots y contenido para redes con ritmo y storytelling visual.",
+      "icon": "reel"
+    },
+    {
+      "title": "Motion UI",
+      "desc": "Microinteracciones y transiciones de interfaz que hacen sentir un producto vivo y pulido.",
+      "icon": "cursor"
+    },
+    {
+      "title": "Identidad animada",
+      "desc": "Logos animados, cortinillas y sistemas de marca en movimiento, listos para cualquier plataforma.",
+      "icon": "spark"
+    },
+    {
+      "title": "Modelado 3D",
+      "desc": "Objetos y escenas en Blender para piezas publicitarias con volumen y textura real.",
+      "icon": "cube"
+    }
   ],
   "faq": [
-    { "q": "¿Cuánto tiempo toma un proyecto de motion graphics?", "a": "Depende de la complejidad, pero una pieza de 15–30 segundos con rigging y expresiones suele tomar entre 5 y 10 días hábiles, desde el guion técnico hasta la entrega final." },
-    { "q": "¿Cuántas rondas de revisión incluyen tus proyectos?", "a": "Cada proyecto incluye dos rondas de ajustes sobre el storyboard y dos sobre la animación final, para asegurar que el resultado se ajuste a lo que necesitas." },
-    { "q": "¿En qué formatos entregas los archivos finales?", "a": "Entrego en el formato y relación de aspecto que tu plataforma necesite (MP4, MOV, GIF, WebM), además del proyecto fuente si lo requieres." },
-    { "q": "¿Trabajas con equipos y agencias, o solo directo con marcas?", "a": "Ambos: he trabajado como freelance independiente y también integrado a equipos de agencia, colaborando con diseñadores, editores y equipos de cuentas." }
+    {
+      "q": "¿Cuánto tiempo toma un proyecto de motion graphics?",
+      "a": "Depende de la complejidad, pero una pieza de 15–30 segundos con rigging y expresiones suele tomar entre 5 y 10 días hábiles, desde el guion técnico hasta la entrega final."
+    },
+    {
+      "q": "¿Cuántas rondas de revisión incluyen tus proyectos?",
+      "a": "Cada proyecto incluye dos rondas de ajustes sobre el storyboard y dos sobre la animación final, para asegurar que el resultado se ajuste a lo que necesitas."
+    },
+    {
+      "q": "¿En qué formatos entregas los archivos finales?",
+      "a": "Entrego en el formato y relación de aspecto que tu plataforma necesite (MP4, MOV, GIF, WebM), además del proyecto fuente si lo requieres."
+    },
+    {
+      "q": "¿Trabajas con equipos y agencias, o solo directo con marcas?",
+      "a": "Ambos: he trabajado como freelance independiente y también integrado a equipos de agencia, colaborando con diseñadores, editores y equipos de cuentas."
+    }
   ],
   "stats": [
-    { "value": "3+", "label": "Años de experiencia freelance" },
-    { "value": "40+", "label": "Piezas de motion entregadas" },
-    { "value": "12", "label": "Rigs y sistemas de expresiones construidos" },
-    { "value": "100%", "label": "Formatos listos para cada plataforma" }
+    {
+      "value": "3+",
+      "label": "Años de experiencia freelance"
+    },
+    {
+      "value": "40+",
+      "label": "Piezas de motion entregadas"
+    },
+    {
+      "value": "12",
+      "label": "Rigs y sistemas de expresiones construidos"
+    },
+    {
+      "value": "100%",
+      "label": "Formatos listos para cada plataforma"
+    }
   ],
   "tools": [
-    { "name": "After Effects", "detail": "Expresiones · Rigging · Motion UI", "grade": "grade-a" },
-    { "name": "Illustrator", "detail": "Diseño de assets vectoriales", "grade": "grade-b" },
-    { "name": "Premiere Pro", "detail": "Edición, ritmo y color", "grade": "grade-c" },
-    { "name": "Blender", "detail": "Modelado 3D y render", "grade": "grade-d" }
+    {
+      "name": "After Effects",
+      "detail": "Expresiones · Rigging · Motion UI",
+      "grade": "grade-a"
+    },
+    {
+      "name": "Illustrator",
+      "detail": "Diseño de assets vectoriales",
+      "grade": "grade-b"
+    },
+    {
+      "name": "Premiere Pro",
+      "detail": "Edición, ritmo y color",
+      "grade": "grade-c"
+    },
+    {
+      "name": "Blender",
+      "detail": "Modelado 3D y render",
+      "grade": "grade-d"
+    }
   ],
   "availability": {
     "status": "Disponible para proyectos freelance",
@@ -100,7 +156,12 @@
       "video": "https://vimeo.com/1220368873",
       "link": "",
       "desc": "Concepto de animación de spot para agencia estudiantil (Folder House), con edición de video y Motion Graphics.",
-      "tags": ["After Effects", "Premiere", "Storyboard"]
+      "tags": [
+        "After Effects",
+        "Premiere",
+        "Storyboard"
+      ],
+      "orientation": "horizontal"
     },
     {
       "id": "p2",
@@ -111,7 +172,12 @@
       "video": "https://vimeo.com/1220371791",
       "link": "",
       "desc": "Video explicativo con assets SVG animados en After Effects y capas de profundidad parallax.",
-      "tags": ["After Effects", "Expresiones", "Illustrator"]
+      "tags": [
+        "After Effects",
+        "Expresiones",
+        "Illustrator"
+      ],
+      "orientation": "horizontal"
     },
     {
       "id": "p3",
@@ -122,7 +188,11 @@
       "video": "https://www-ccv.adobe.io/v1/player/ccv/GcbK4jZGD78/embed?api_key=behance1&bgcolor=%23191919",
       "link": "",
       "desc": "Investigación académica sobre cómo la animación de microinteracciones y transiciones de estado reduce la fricción percibida en interfaces digitales.",
-      "tags": ["UX Research", "Motion UI"]
+      "tags": [
+        "UX Research",
+        "Motion UI"
+      ],
+      "orientation": "horizontal"
     },
     {
       "id": "p4",
@@ -133,7 +203,34 @@
       "video": "",
       "link": "",
       "desc": "Modelado de un carrito de comida en Blender, explorando formas orgánicas inspiradas en el universo de Cloudy with a Chance of Meatballs.",
-      "tags": ["Blender", "Modelado 3D"]
+      "tags": [
+        "Blender",
+        "Modelado 3D"
+      ],
+      "orientation": "horizontal"
+    }
+  ],
+  "upcoming": [
+    {
+      "title": "Reel vertical para redes",
+      "cat": "Motion Graphics · Reels/Shorts",
+      "orientation": "vertical",
+      "eta": "En producción",
+      "desc": "Pieza vertical pensada para Instagram Reels y TikTok, con tipografía animada y cortes al ritmo de la música."
+    },
+    {
+      "title": "Spot horizontal de marca",
+      "cat": "Motion Graphics · TV/Web",
+      "orientation": "horizontal",
+      "eta": "Próximamente",
+      "desc": "Comercial en formato 16:9 con rigging de personaje y composición multicámara."
+    },
+    {
+      "title": "Historia animada — formato vertical",
+      "cat": "Identidad animada",
+      "orientation": "vertical",
+      "eta": "Próximamente",
+      "desc": "Serie de historias animadas en formato story, con sistema de marca en movimiento."
     }
   ]
 }
