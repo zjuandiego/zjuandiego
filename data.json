@@ -8,6 +8,28 @@
   },
   "footerName": "Juan Jaramillo",
   "formEndpoint": "https://formspree.io/f/xnpawopr",
+  "process": [
+    {
+      "step": "01",
+      "title": "Concepto & Storyboard",
+      "desc": "Defino la narrativa visual: guion técnico, planos y ritmo antes de abrir After Effects."
+    },
+    {
+      "step": "02",
+      "title": "Rigging & Controladores",
+      "desc": "Construyo rigs basados en controladores y jerarquías null para animar rápido y de forma no destructiva."
+    },
+    {
+      "step": "03",
+      "title": "Animación & Expresiones",
+      "desc": "Doy vida al movimiento con expresiones (spring, wiggle, easing) y principios de animación clásica."
+    },
+    {
+      "step": "04",
+      "title": "Render & Entrega",
+      "desc": "Exporto en los formatos y relaciones de aspecto que cada plataforma necesita, listo para publicar."
+    }
+  ],
   "skills": [
     {
       "name": "After Effects",
@@ -54,6 +76,7 @@
       "title": "Logo animado — Folder House",
       "cat": "Branding · Motion",
       "tc": "2026",
+      "featured": true,
       "img": "https://picsum.photos/seed/folderhouse/800/500",
       "video": "",
       "link": "",
