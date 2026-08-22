@@ -412,11 +412,35 @@
     overflow:hidden; transition:border-color .3s, transform .35s cubic-bezier(.2,.8,.2,1);
   }
   .upcoming-card:hover{ border-color:var(--scene-grade); transform:translateY(-4px); }
-  .upcoming-slate{ position:relative; aspect-ratio:16/10; background:
-      repeating-linear-gradient(135deg, var(--bg-alt) 0 14px, var(--surface-hi) 14px 28px);
-      display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .upcoming-slate{
+    position:relative; aspect-ratio:16/10; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    background-color:var(--bg-alt);
+    background-image:
+      radial-gradient(120% 140% at 15% 20%, rgba(185,140,255,.32), transparent 55%),
+      radial-gradient(120% 140% at 85% 15%, rgba(92,201,255,.28), transparent 55%),
+      radial-gradient(140% 160% at 50% 100%, rgba(255,184,77,.24), transparent 60%);
+    background-size:200% 200%;
+    background-position:0% 0%, 100% 0%, 50% 100%;
+  }
+  @media (prefers-reduced-motion:no-preference){ .upcoming-slate{ animation:grade-drift 16s ease-in-out infinite alternate; } }
+  @keyframes grade-drift{
+    from{ background-position:0% 0%, 100% 0%, 50% 100%; }
+    to{ background-position:14% 22%, 86% 18%, 54% 86%; }
+  }
+  .upcoming-slate::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 32%, transparent 35%, rgba(9,9,10,.6) 100%); pointer-events:none; }
   .upcoming-card.is-vertical .upcoming-slate{ aspect-ratio:9/16; }
-  .upcoming-slate-icon{ width:44px; height:44px; color:var(--text-muted); opacity:.55; }
+  .upcoming-slate-icon{ position:relative; z-index:1; width:38px; height:38px; color:var(--text); opacity:.28; }
+  .upcoming-scrub{ position:absolute; left:18px; right:18px; bottom:18px; z-index:1; }
+  .upcoming-scrub-track{ position:relative; height:2px; border-radius:2px; background:rgba(255,255,255,.16); }
+  .upcoming-scrub-fill{ position:absolute; top:0; left:0; height:100%; border-radius:2px; background:var(--scene-grade); }
+  .upcoming-scrub-head{ position:absolute; top:50%; width:7px; height:7px; margin:-3.5px 0 0 -3.5px; border-radius:50%; background:var(--scene-grade); box-shadow:0 0 8px var(--scene-grade); }
+  @media (prefers-reduced-motion:no-preference){ .upcoming-card:nth-child(1) .upcoming-scrub-head, .upcoming-card:nth-child(1) .upcoming-scrub-fill{ animation:scrub-play 4.5s ease-in-out infinite alternate; } .upcoming-card:nth-child(2) .upcoming-scrub-head, .upcoming-card:nth-child(2) .upcoming-scrub-fill{ animation:scrub-play 5.5s ease-in-out .3s infinite alternate; } .upcoming-card:nth-child(3) .upcoming-scrub-head, .upcoming-card:nth-child(3) .upcoming-scrub-fill{ animation:scrub-play 5s ease-in-out .6s infinite alternate; } }
+  .upcoming-scrub-head{ animation-name:scrub-play-head; }
+  .upcoming-scrub-fill{ animation-name:scrub-play-fill; }
+  @keyframes scrub-play-head{ from{ left:8%; } to{ left:64%; } }
+  @keyframes scrub-play-fill{ from{ width:8%; } to{ width:64%; } }
+  .upcoming-scrub-label{ margin-top:9px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.5); display:flex; justify-content:space-between; }
   .upcoming-eta{ position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--scene-grade); background:rgba(10,10,11,.7); padding:6px 11px; border-radius:20px; border:1px solid var(--line); }
   .upcoming-eta .dot{ width:6px; height:6px; border-radius:50%; background:var(--scene-grade); flex-shrink:0; }
   @media (prefers-reduced-motion:no-preference){ .upcoming-eta .dot{ animation:rec-pulse 1.6s ease-in-out infinite; } }
@@ -1116,12 +1140,20 @@ function renderUpcoming(){
   if(!items.length){ el.innerHTML = ''; if(note) note.style.display = 'none'; return; }
   el.innerHTML = items.map((p,i)=>{
     const isVertical = p.orientation === 'vertical';
+    const pct = 22 + ((i*17) % 46); // just enough variety to feel alive, not a real progress value
     return `
     <div class="upcoming-card reveal${isVertical ? ' is-vertical' : ''}" style="transition-delay:${i*80}ms">
       <div class="upcoming-slate">
-        <svg class="upcoming-slate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l3-4h5l-2 4"/><path d="M9 7l3-4h5l-2 4"/><path d="M3 7h18v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>
+        <svg class="upcoming-slate-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <div class="upcoming-eta mono"><span class="dot"></span>${escapeHtml(p.eta||'Próximamente')}</div>
         <div class="upcoming-format mono">${formatBadge(p.orientation)}</div>
+        <div class="upcoming-scrub">
+          <div class="upcoming-scrub-track">
+            <div class="upcoming-scrub-fill" style="width:${pct}%"></div>
+            <div class="upcoming-scrub-head" style="left:${pct}%"></div>
+          </div>
+          <div class="upcoming-scrub-label"><span>Timeline</span><span>${pct}%</span></div>
+        </div>
       </div>
       <div class="upcoming-body">
         <div class="upcoming-cat mono">${escapeHtml(p.cat||'')}</div>
