@@ -19,6 +19,11 @@
     --accent-2:#33e6c0;
     --line:#2e2e33;
     --radius:10px;
+    /* "color grades" — each scene gets its own LUT, like grading a timeline */
+    --grade-a:#b98cff;
+    --grade-b:#ffb84d;
+    --grade-c:#5cc9ff;
+    --grade-d:#ff5f9e;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -215,6 +220,47 @@
   .process-title{ font-size:18px; font-weight:600; margin-bottom:8px; }
   .process-desc{ font-size:14px; color:var(--text-muted); max-width:280px; }
 
+  /* ---------- scene grade badge (per-section color grade) ---------- */
+  .grade-badge{ display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--scene-grade, var(--accent)); border:1px solid var(--line); padding:5px 12px; border-radius:20px; margin-bottom:18px; }
+  .grade-badge::before{ content:''; width:7px; height:7px; border-radius:1px; background:var(--scene-grade, var(--accent)); }
+
+  /* ---------- stats / footage log ---------- */
+  #metricas{ --scene-grade:var(--grade-a); position:relative; }
+  #metricas::before{ content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 20% 0%, rgba(185,140,255,.10), transparent 55%); pointer-events:none; }
+  .stats-rail{ position:relative; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  @media (max-width:820px){ .stats-rail{ grid-template-columns:repeat(2,1fr); } }
+  .stat-cell{ padding:34px 22px; border-right:1px solid var(--line); position:relative; }
+  .stat-cell:nth-child(4n){ border-right:none; }
+  @media (max-width:820px){ .stat-cell:nth-child(2n){ border-right:none; } .stat-cell:nth-child(4n){ border-right:1px solid var(--line); } .stat-cell:nth-child(2n+1){ border-right:1px solid var(--line); } }
+  .stat-cell::after{ content:''; position:absolute; left:22px; top:14px; width:14px; height:9px; border:1px solid var(--line); border-radius:2px; opacity:.6; }
+  .stat-value{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(34px,4.4vw,54px); color:var(--scene-grade); line-height:1; margin:20px 0 10px; letter-spacing:-.02em; }
+  .stat-label{ font-size:13px; color:var(--text-muted); max-width:220px; }
+
+  /* ---------- tools filmstrip ---------- */
+  #herramientas{ --scene-grade:var(--grade-b); overflow:hidden; }
+  .filmstrip-track{ display:flex; gap:22px; will-change:transform; }
+  .film-card{ flex:0 0 260px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px 24px; position:relative; overflow:hidden; }
+  .film-card::before{ content:''; position:absolute; inset:0; opacity:.08; background:var(--tool-grade, var(--grade-b)); }
+  .film-card::after{ content:''; position:absolute; left:0; right:0; top:0; height:3px; background:var(--tool-grade, var(--grade-b)); }
+  .film-perf{ position:relative; display:flex; gap:6px; margin-bottom:22px; }
+  .film-perf span{ width:8px; height:8px; border-radius:2px; background:var(--line); }
+  .film-name{ position:relative; font-size:19px; font-weight:600; margin-bottom:8px; }
+  .film-detail{ position:relative; font-size:13px; color:var(--text-muted); }
+  @media (max-width:720px){ .filmstrip-track{ flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; } .film-card{ scroll-snap-align:start; } }
+
+  /* ---------- availability CTA ---------- */
+  #disponibilidad{ padding:90px 0; position:relative; overflow:hidden; --scene-grade:var(--grade-d); }
+  .cta-panel{ position:relative; border:1px solid var(--line); border-radius:16px; padding:64px 44px; overflow:hidden; background:var(--surface); text-align:center; }
+  .cta-glow{ position:absolute; inset:-40%; background:conic-gradient(from 0deg, var(--grade-a), var(--accent), var(--grade-d), var(--accent-2), var(--grade-a)); opacity:.16; filter:blur(60px); z-index:0; }
+  @media (prefers-reduced-motion:no-preference){ .cta-glow{ animation:cta-spin 18s linear infinite; } }
+  @keyframes cta-spin{ to{ transform:rotate(360deg); } }
+  .cta-inner{ position:relative; z-index:1; }
+  .cta-status{ display:inline-flex; align-items:center; gap:9px; font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--accent-2); background:rgba(51,230,192,.1); border:1px solid rgba(51,230,192,.3); padding:8px 16px; border-radius:20px; margin-bottom:26px; }
+  .cta-status .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent-2); }
+  @media (prefers-reduced-motion:no-preference){ .cta-status .dot{ animation:rec-pulse 1.6s ease-in-out infinite; } }
+  .cta-inner h2{ font-size:clamp(30px,4.6vw,50px); font-weight:600; max-width:760px; margin:0 auto 18px; line-height:1.12; }
+  .cta-inner p{ color:var(--text-muted); max-width:520px; margin:0 auto 34px; font-size:16px; }
+
   /* ---------- project grid ---------- */
   .grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:28px; }
   @media (max-width:760px){ .grid{ grid-template-columns:1fr; } }
@@ -328,7 +374,9 @@
       <div class="nav-stops">
         <div class="nav-stop" data-target="hero"></div>
         <div class="nav-stop" data-target="trabajo"></div>
+        <div class="nav-stop" data-target="metricas"></div>
         <div class="nav-stop" data-target="proceso"></div>
+        <div class="nav-stop" data-target="herramientas"></div>
         <div class="nav-stop" data-target="sobre-mi"></div>
         <div class="nav-stop" data-target="contacto"></div>
       </div>
@@ -354,9 +402,11 @@
   <div class="mobile-menu-scenes">
     <a class="scene" data-target="hero" href="#hero"><span class="num mono">ESC. 00</span><span class="label">Inicio</span></a>
     <a class="scene" data-target="trabajo" href="#trabajo"><span class="num mono">ESC. 01</span><span class="label">Trabajo</span></a>
-    <a class="scene" data-target="proceso" href="#proceso"><span class="num mono">ESC. 02</span><span class="label">Proceso</span></a>
-    <a class="scene" data-target="sobre-mi" href="#sobre-mi"><span class="num mono">ESC. 03</span><span class="label">Sobre mí</span></a>
-    <a class="scene" data-target="contacto" href="#contacto"><span class="num mono">ESC. 04</span><span class="label">Contacto</span></a>
+    <a class="scene" data-target="metricas" href="#metricas"><span class="num mono">ESC. 02</span><span class="label">En cifras</span></a>
+    <a class="scene" data-target="proceso" href="#proceso"><span class="num mono">ESC. 03</span><span class="label">Proceso</span></a>
+    <a class="scene" data-target="herramientas" href="#herramientas"><span class="num mono">ESC. 04</span><span class="label">Herramientas</span></a>
+    <a class="scene" data-target="sobre-mi" href="#sobre-mi"><span class="num mono">ESC. 05</span><span class="label">Sobre mí</span></a>
+    <a class="scene" data-target="contacto" href="#contacto"><span class="num mono">ESC. 06</span><span class="label">Contacto</span></a>
   </div>
   <div class="mobile-menu-foot mono">Selecciona una escena para saltar</div>
 </div>
@@ -402,16 +452,34 @@
   </div>
 </section>
 
+<section id="metricas">
+  <div class="wrap">
+    <div class="grade-badge">LUT · Cool 04</div>
+    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 02</span><h2>En cifras</h2><div class="sec-rule"></div></div>
+    <div class="stats-rail" id="statsRail"></div>
+  </div>
+</section>
+
 <section id="proceso">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 02</span><h2>Proceso</h2><div class="sec-rule"></div></div>
+    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 03</span><h2>Proceso</h2><div class="sec-rule"></div></div>
     <div class="process-rail" id="processRail"></div>
+  </div>
+</section>
+
+<section id="herramientas">
+  <div class="wrap">
+    <div class="grade-badge">LUT · Warm 12</div>
+    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 04</span><h2>Herramientas</h2><div class="sec-rule"></div></div>
+  </div>
+  <div class="wrap" style="overflow:hidden;">
+    <div class="filmstrip-track" id="filmstripTrack"></div>
   </div>
 </section>
 
 <section id="sobre-mi">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 03</span><h2>Sobre mí</h2><div class="sec-rule"></div></div>
+    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 05</span><h2>Sobre mí</h2><div class="sec-rule"></div></div>
     <div class="about-grid">
       <div class="about-text reveal" id="aboutText"></div>
       <div class="reveal"><div class="asset-list" id="skillsList"></div></div>
@@ -419,9 +487,23 @@
   </div>
 </section>
 
+<section id="disponibilidad">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="cta-inner">
+        <div class="cta-status"><span class="dot"></span><span id="ctaStatus">Disponible para proyectos freelance</span></div>
+        <h2 id="ctaTitle">¿Listo para poner tu marca en movimiento?</h2>
+        <p id="ctaText"></p>
+        <a href="#contacto" class="btn btn-primary">Hablemos del proyecto →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contacto">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 04</span><h2>Contacto</h2><div class="sec-rule"></div></div>
+    <div class="sec-head reveal"><span class="sec-tag mono">ESC. 07</span><h2>Contacto</h2><div class="sec-rule"></div></div>
     <div class="export-panel reveal" id="contactPanel"></div>
     <div class="contact-form-wrap reveal">
       <form id="contactForm" novalidate>
@@ -463,6 +545,8 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* =========================================================
    Este sitio lee TODO su contenido desde data.json, que
@@ -539,11 +623,85 @@ function renderAll(){
       </div>`).join('');
   }
 
+  if(Array.isArray(state.stats)){
+    document.getElementById('statsRail').innerHTML = state.stats.map((s,i)=>`
+      <div class="stat-cell reveal" style="transition-delay:${i*90}ms">
+        <div class="stat-value mono" data-count="${escapeAttr(s.value)}">0</div>
+        <div class="stat-label">${escapeHtml(s.label)}</div>
+      </div>`).join('');
+  }
+
+  if(Array.isArray(state.tools)){
+    const gradeMap = { 'grade-a':'var(--grade-a)', 'grade-b':'var(--grade-b)', 'grade-c':'var(--grade-c)', 'grade-d':'var(--grade-d)' };
+    const cardsHtml = state.tools.map(t=>`
+      <div class="film-card" style="--tool-grade:${gradeMap[t.grade]||'var(--grade-b)'}">
+        <div class="film-perf"><span></span><span></span><span></span><span></span></div>
+        <div class="film-name">${escapeHtml(t.name)}</div>
+        <div class="film-detail mono">${escapeHtml(t.detail||'')}</div>
+      </div>`).join('');
+    // duplicate for a seamless scrub loop
+    document.getElementById('filmstripTrack').innerHTML = cardsHtml + cardsHtml;
+  }
+
+  if(state.availability){
+    document.getElementById('ctaStatus').textContent = state.availability.status || '';
+    document.getElementById('ctaText').textContent = state.availability.text || '';
+  }
+
   renderProjects();
+  bindReveal();
+  bindStatCounters();
+  bindFilmstripScrub();
 
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     document.getElementById('hero').classList.add('ready');
   }));
+}
+
+/* ---------- animated stat counters ---------- */
+function bindStatCounters(){
+  const cells = document.querySelectorAll('.stat-value[data-count]');
+  if(!cells.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting) return;
+      io.unobserve(en.target);
+      const raw = en.target.dataset.count;
+      const match = raw.match(/^([\d.,]+)(.*)$/);
+      if(!match || prefersReducedMotion){ en.target.textContent = raw; return; }
+      const target = parseFloat(match[1].replace(',', '.'));
+      const suffix = match[2] || '';
+      const dur = 1200, start = performance.now();
+      function step(now){
+        const p = Math.min(1, (now-start)/dur);
+        const eased = 1 - Math.pow(1-p, 3);
+        const val = target * eased;
+        en.target.textContent = (Number.isInteger(target) ? Math.round(val) : val.toFixed(1)) + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold:0.4 });
+  cells.forEach(c=>io.observe(c));
+}
+
+/* ---------- scroll-scrubbed tools filmstrip ---------- */
+function bindFilmstripScrub(){
+  const track = document.getElementById('filmstripTrack');
+  if(!track || !window.gsap || !window.ScrollTrigger || prefersReducedMotion) return;
+  if(window.matchMedia('(max-width:720px)').matches) return; // mobile uses native scroll-snap instead
+  gsap.registerPlugin(ScrollTrigger);
+  const distance = track.scrollWidth/2;
+  gsap.to(track, {
+    x: -distance,
+    ease:'none',
+    scrollTrigger:{
+      trigger:'#herramientas',
+      start:'top bottom',
+      end:'bottom top',
+      scrub:0.6
+    }
+  });
 }
 
 function renderProjects(){
@@ -757,7 +915,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 })();
 
 /* ---------- section nav sync ---------- */
-const sections = ['hero','trabajo','proceso','sobre-mi','contacto'];
+const sections = ['hero','trabajo','metricas','proceso','herramientas','sobre-mi','contacto'];
 const stops = document.querySelectorAll('.nav-stop');
 const navLinks = document.querySelectorAll('.nav-links a');
 function updateNav(activeIndex){
