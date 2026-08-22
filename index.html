@@ -1155,7 +1155,7 @@ function openProject(id){
   if(vid){
     if(vid.includes('youtube.com') || vid.includes('youtu.be')){
       let embedUrl = vid;
-      const ytMatch = vid.match(/(?:youtu\.be\/|v=)([\w-]{6,})/);
+      const ytMatch = vid.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{6,})/);
       if(ytMatch) embedUrl = 'https://www.youtube.com/embed/'+ytMatch[1];
       embedUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
       mediaEl.innerHTML = `<iframe src="${escapeAttr(embedUrl)}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
