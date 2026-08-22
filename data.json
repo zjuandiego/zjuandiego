@@ -8,6 +8,22 @@
   },
   "footerName": "Juan Jaramillo",
   "formEndpoint": "https://formspree.io/f/xnpawopr",
+  "stats": [
+    { "value": "3+", "label": "Años de experiencia freelance" },
+    { "value": "40+", "label": "Piezas de motion entregadas" },
+    { "value": "12", "label": "Rigs y sistemas de expresiones construidos" },
+    { "value": "100%", "label": "Formatos listos para cada plataforma" }
+  ],
+  "tools": [
+    { "name": "After Effects", "detail": "Expresiones · Rigging · Motion UI", "grade": "grade-a" },
+    { "name": "Illustrator", "detail": "Diseño de assets vectoriales", "grade": "grade-b" },
+    { "name": "Premiere Pro", "detail": "Edición, ritmo y color", "grade": "grade-c" },
+    { "name": "Blender", "detail": "Modelado 3D y render", "grade": "grade-d" }
+  ],
+  "availability": {
+    "status": "Disponible para proyectos freelance",
+    "text": "Trabajo remoto con estudios, agencias y marcas. Cupo abierto para animación de marca, motion UI y piezas 3D."
+  },
   "process": [
     {
       "step": "01",
