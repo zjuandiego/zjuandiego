@@ -52,7 +52,7 @@
   "stats": [
     {
       "value": "3+",
-      "label": "Años de experiencia en Motion Graphics"
+      "label": "Años de experiencia freelance"
     },
     {
       "value": "40+",
@@ -185,7 +185,7 @@
       "cat": "Investigación · UI Motion",
       "tc": "2026",
       "img": "https://picsum.photos/seed/uxresearch/800/500",
-      "video": "https://youtu.be/E-NqfXdSNtM",
+      "video": "https://www-ccv.adobe.io/v1/player/ccv/GcbK4jZGD78/embed?api_key=behance1&bgcolor=%23191919",
       "link": "",
       "desc": "Investigación académica sobre cómo la animación de microinteracciones y transiciones de estado reduce la fricción percibida en interfaces digitales.",
       "tags": [
@@ -208,6 +208,21 @@
         "Modelado 3D"
       ],
       "orientation": "horizontal"
+    },
+    {
+      "id": "p5",
+      "title": "Reel vertical — [Edita este título]",
+      "cat": "Motion Graphics · Reels",
+      "tc": "00:00",
+      "orientation": "vertical",
+      "img": "https://img.youtube.com/vi/vN3xEb74ne8/hqdefault.jpg",
+      "video": "https://youtube.com/shorts/vN3xEb74ne8",
+      "link": "",
+      "desc": "Reel vertical para redes sociales. Edita esta descripción con el detalle real del proyecto (marca, herramientas, objetivo).",
+      "tags": [
+        "After Effects",
+        "Motion Graphics"
+      ]
     }
   ],
   "upcoming": [
@@ -216,7 +231,6 @@
       "cat": "Motion Graphics · Reels/Shorts",
       "orientation": "vertical",
       "eta": "En producción",
-       "video": "https://youtube.com/shorts/vN3xEb74ne8?feature=share",
       "desc": "Pieza vertical pensada para Instagram Reels y TikTok, con tipografía animada y cortes al ritmo de la música."
     },
     {
