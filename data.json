@@ -8,6 +8,19 @@
   },
   "footerName": "Juan Jaramillo",
   "formEndpoint": "https://formspree.io/f/xnpawopr",
+  "cvUrl": "",
+  "services": [
+    { "title": "Motion Graphics", "desc": "Animación de piezas de marca, spots y contenido para redes con ritmo y storytelling visual.", "icon": "reel" },
+    { "title": "Motion UI", "desc": "Microinteracciones y transiciones de interfaz que hacen sentir un producto vivo y pulido.", "icon": "cursor" },
+    { "title": "Identidad animada", "desc": "Logos animados, cortinillas y sistemas de marca en movimiento, listos para cualquier plataforma.", "icon": "spark" },
+    { "title": "Modelado 3D", "desc": "Objetos y escenas en Blender para piezas publicitarias con volumen y textura real.", "icon": "cube" }
+  ],
+  "faq": [
+    { "q": "¿Cuánto tiempo toma un proyecto de motion graphics?", "a": "Depende de la complejidad, pero una pieza de 15–30 segundos con rigging y expresiones suele tomar entre 5 y 10 días hábiles, desde el guion técnico hasta la entrega final." },
+    { "q": "¿Cuántas rondas de revisión incluyen tus proyectos?", "a": "Cada proyecto incluye dos rondas de ajustes sobre el storyboard y dos sobre la animación final, para asegurar que el resultado se ajuste a lo que necesitas." },
+    { "q": "¿En qué formatos entregas los archivos finales?", "a": "Entrego en el formato y relación de aspecto que tu plataforma necesite (MP4, MOV, GIF, WebM), además del proyecto fuente si lo requieres." },
+    { "q": "¿Trabajas con equipos y agencias, o solo directo con marcas?", "a": "Ambos: he trabajado como freelance independiente y también integrado a equipos de agencia, colaborando con diseñadores, editores y equipos de cuentas." }
+  ],
   "stats": [
     { "value": "3+", "label": "Años de experiencia freelance" },
     { "value": "40+", "label": "Piezas de motion entregadas" },
@@ -96,7 +109,8 @@
       "img": "Spot.png.png",
       "video": "https://vimeo.com/1220368873",
       "link": "",
-      "desc": "Concepto de animación de spot para agencia estudiantil (Folder House), con edición de video y Motion Graphics."
+      "desc": "Concepto de animación de spot para agencia estudiantil (Folder House), con edición de video y Motion Graphics.",
+      "tags": ["After Effects", "Premiere", "Storyboard"]
     },
     {
       "id": "p2",
@@ -106,7 +120,8 @@
       "img": "Folder.png",
       "video": "https://vimeo.com/1220371791",
       "link": "",
-      "desc": "Video explicativo con assets SVG animados en After Effects y capas de profundidad parallax."
+      "desc": "Video explicativo con assets SVG animados en After Effects y capas de profundidad parallax.",
+      "tags": ["After Effects", "Expresiones", "Illustrator"]
     },
     {
       "id": "p3",
@@ -116,7 +131,8 @@
       "img": "https://picsum.photos/seed/uxresearch/800/500",
       "video": "",
       "link": "",
-      "desc": "Investigación académica sobre cómo la animación de microinteracciones y transiciones de estado reduce la fricción percibida en interfaces digitales."
+      "desc": "Investigación académica sobre cómo la animación de microinteracciones y transiciones de estado reduce la fricción percibida en interfaces digitales.",
+      "tags": ["UX Research", "Motion UI"]
     },
     {
       "id": "p4",
@@ -126,7 +142,8 @@
       "img": "https://picsum.photos/seed/foodcart3d/800/500",
       "video": "",
       "link": "",
-      "desc": "Modelado de un carrito de comida en Blender, explorando formas orgánicas inspiradas en el universo de Cloudy with a Chance of Meatballs."
+      "desc": "Modelado de un carrito de comida en Blender, explorando formas orgánicas inspiradas en el universo de Cloudy with a Chance of Meatballs.",
+      "tags": ["Blender", "Modelado 3D"]
     }
   ]
 }
