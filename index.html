@@ -34,7 +34,7 @@ body{
   background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif;
   line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden; width:100%; max-width:100vw;
 }
-h1,h2,h3,.display{ font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; line-height:.94; overflow-wrap:break-word; }
+h1,h2,h3,.display{ font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; line-height:1.03; overflow-wrap:break-word; }
 .mono{ font-family:'Space Mono',monospace; }
 a{ color:inherit; text-decoration:none; }
 ::selection{ background:var(--red); color:var(--white); }
@@ -122,7 +122,10 @@ body.menu-locked{ overflow:hidden; }
 .hero-copy .eyebrow{ margin-bottom:22px; opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s cubic-bezier(.16,.84,.44,1); }
 #hero.ready .hero-copy .eyebrow{ opacity:1; transform:translateY(0); }
 #hero h1{ font-size:clamp(40px,6.6vw,84px); margin-bottom:28px; }
-.word{ display:inline-block; overflow:hidden; vertical-align:top; padding-top:.1em; margin-top:-.1em; padding-bottom:.1em; margin-bottom:-.1em; }
+/* Más aire arriba de cada palabra: en mayúsculas, la virgulilla de la Ñ
+   (y tildes de vocales) queda muy pegada al borde superior del overflow:hidden
+   y se recortaba con el padding anterior, demasiado ajustado. */
+.word{ display:inline-block; overflow:hidden; vertical-align:top; padding-top:.26em; margin-top:-.26em; padding-bottom:.12em; margin-bottom:-.12em; }
 .word-inner{ display:inline-block; transform:translateY(112%); transition:transform .8s cubic-bezier(.16,.84,.44,1); }
 #hero.ready .word-inner{ transform:translateY(0); }
 #hero .lede{ font-family:'Inter',sans-serif; font-size:18px; color:var(--ink-soft); max-width:520px; margin-bottom:36px; opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s cubic-bezier(.16,.84,.44,1); transition-delay:.35s; }
@@ -131,9 +134,26 @@ body.menu-locked{ overflow:hidden; }
 #hero.ready .hero-actions{ opacity:1; transform:translateY(0); }
 
 /* the monitor — hero signature frame */
-.hero-monitor{ opacity:0; transform:translateY(18px) scale(.98); transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1); transition-delay:.2s; }
+.hero-monitor{ position:relative; opacity:0; transform:translateY(18px) scale(.98); transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1); transition-delay:.2s; }
 #hero.ready .hero-monitor{ opacity:1; transform:translateY(0) scale(1); }
-.monitor-frame{ position:relative; background:var(--ink); border:2px solid var(--ink); border-radius:10px; padding:14px 14px 20px; box-shadow:8px 8px 0 var(--red); }
+.monitor-frame{ position:relative; z-index:1; background:var(--ink); border:2px solid var(--ink); border-radius:10px; padding:14px 14px 20px; box-shadow:8px 8px 0 var(--red); }
+
+/* ---------- decoración After Effects: órbita de keyframes + anchor point ---------- */
+.hero-ae-deco{ position:absolute; top:50%; left:50%; width:132%; aspect-ratio:1/1; transform:translate(-50%,-50%); z-index:0; pointer-events:none; }
+@media (max-width:980px){ .hero-ae-deco{ width:108%; } }
+.ae-orbit{ width:100%; height:100%; display:block; animation:ae-spin 38s linear infinite; }
+@keyframes ae-spin{ to{ transform:rotate(360deg); } }
+.ae-anchor{ position:absolute; top:50%; left:50%; width:16px; height:16px; transform:translate(-50%,-50%); border:2px solid var(--ink); border-radius:50%; background:var(--paper); }
+.ae-anchor::before,.ae-anchor::after{ content:''; position:absolute; background:var(--ink); }
+.ae-anchor::before{ top:50%; left:-11px; right:-11px; height:1.5px; transform:translateY(-50%); }
+.ae-anchor::after{ left:50%; top:-11px; bottom:-11px; width:1.5px; transform:translateX(-50%); }
+.ae-tag{ position:absolute; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.05em; color:var(--ink-soft); background:rgba(238,240,234,.9); border:1.5px solid var(--ink); border-radius:20px; padding:4px 10px; animation:ae-float 5.5s ease-in-out infinite; white-space:nowrap; }
+.ae-tag-1{ top:-4%; left:8%; animation-delay:0s; }
+.ae-tag-2{ bottom:6%; left:-9%; animation-delay:1.3s; }
+.ae-tag-3{ bottom:-5%; right:2%; animation-delay:2.6s; }
+@media (max-width:980px){ .ae-tag-2{ left:-2%; } .ae-tag-3{ right:-2%; } }
+@keyframes ae-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+@media (prefers-reduced-motion:reduce){ .ae-orbit{ animation:none; } .ae-tag{ animation:none; } }
 .monitor-screen{ position:relative; aspect-ratio:4/3; background:#000; border-radius:3px; overflow:hidden; }
 .monitor-screen iframe, .monitor-screen video{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 .monitor-screen .noplay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#555; font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; }
@@ -162,7 +182,12 @@ body.menu-locked{ overflow:hidden; }
 .reel-card{ flex:0 0 auto; width:250px; scroll-snap-align:start; }
 .reel-tape{ font-family:'Space Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.05em; background:var(--yellow); color:var(--ink); padding:6px 12px; border:2px solid var(--ink); border-bottom:none; transform:rotate(-1.2deg); display:inline-block; margin-left:14px; margin-bottom:-2px; position:relative; z-index:2; max-width:88%; }
 .reel-body{ position:relative; aspect-ratio:9/16; background:#000; border:2px solid var(--ink); border-radius:10px; overflow:hidden; box-shadow:6px 6px 0 var(--ink); }
-.reel-body iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+/* El iframe se escala y se centra por encima del tamaño real del contenedor:
+   así el botón de play, el logo y la barra de controles nativos del
+   reproductor (Vimeo/YouTube) quedan recortados fuera del área visible.
+   pointer-events:none los desactiva por completo: son piezas puramente
+   ambientales, en loop, sin ninguna interacción posible. */
+.reel-body iframe{ position:absolute; top:50%; left:50%; width:150%; height:150%; transform:translate(-50%,-50%); border:0; pointer-events:none; }
 .reel-body .placeholder{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:
     repeating-linear-gradient(135deg, #1a1a1c 0 14px, #202022 14px 28px); }
 .reel-body .placeholder .stamp{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--paper); border:2px solid var(--paper); padding:8px 14px; border-radius:4px; text-transform:uppercase; transform:rotate(-8deg); }
@@ -370,6 +395,18 @@ footer{ background:var(--paper-alt); padding:0; }
         </div>
       </div>
       <div class="hero-monitor">
+        <div class="hero-ae-deco" aria-hidden="true">
+          <svg class="ae-orbit" viewBox="0 0 300 300">
+            <circle cx="150" cy="150" r="130" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="2 11" opacity=".38"/>
+            <rect x="141" y="12" width="18" height="18" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 150 21)"/>
+            <rect x="269" y="141" width="18" height="18" fill="var(--red)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 278 150)"/>
+            <rect x="13" y="141" width="18" height="18" fill="#26C6D1" stroke="var(--ink)" stroke-width="2" transform="rotate(45 22 150)"/>
+          </svg>
+          <div class="ae-anchor"></div>
+          <div class="ae-tag ae-tag-1 mono">wiggle()</div>
+          <div class="ae-tag ae-tag-2 mono">ease</div>
+          <div class="ae-tag ae-tag-3 mono">spring()</div>
+        </div>
         <div class="monitor-frame">
           <div class="monitor-screen" id="heroScreen">
             <div class="noplay mono">Cargando señal…</div>
@@ -941,6 +978,12 @@ function bindReveal(){
 
 /* ---------- nav active link on scroll ---------- */
 (function(){
+  // Se usa una franja delgada cerca del tope del viewport en lugar de exigir que
+  // el 50% de CADA sección esté visible: con threshold:0.5, una sección corta
+  // (como "servicios") alcanza ese porcentaje mucho antes que una larga (como
+  // "trabajo"), y terminaba robándose el subrayado aunque siguiéramos dentro
+  // de "trabajo". Con una franja fija, gana la sección que realmente está
+  // cruzando esa línea, sin importar cuán alta sea.
   const ids = ['reels','trabajo','servicios','sobre-mi','faq','contacto'];
   const links = document.querySelectorAll('.nav-links a[data-target]');
   const io = new IntersectionObserver((entries)=>{
@@ -949,7 +992,7 @@ function bindReveal(){
         links.forEach(l=>l.classList.toggle('active', l.dataset.target===entry.target.id));
       }
     });
-  }, { threshold:0.5 });
+  }, { rootMargin:'-96px 0px -70% 0px', threshold:0 });
   ids.forEach(id=>{ const el = document.getElementById(id); if(el) io.observe(el); });
 })();
 
