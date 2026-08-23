@@ -128,10 +128,11 @@
 
   .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; opacity:0; transform:translateY(14px); transition:opacity .7s ease .65s, transform .7s cubic-bezier(.16,.84,.44,1) .65s; margin-bottom:52px; }
   #hero.ready .hero-actions{ opacity:1; transform:translateY(0); }
-  .btn{ font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:700; padding:15px 26px; border-radius:999px; border:1px solid var(--line); cursor:pointer; transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .25s, background .25s; display:inline-flex; align-items:center; gap:9px; background:transparent; color:var(--ink); }
+  .btn{ font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:700; padding:15px 26px; border-radius:999px; border:1px solid var(--line); cursor:pointer; transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .25s, background .25s; display:inline-flex; align-items:center; gap:9px; background:transparent; color:var(--ink); will-change:transform; }
   .btn-primary{ background:var(--grad-main); border-color:transparent; color:#160b2c; }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -12px rgba(139,92,246,.7); }
-  .btn:not(.btn-primary):hover{ border-color:var(--violet-2); transform:translateY(-2px); background:rgba(139,92,246,.08); }
+  .btn-primary:hover{ box-shadow:0 14px 30px -12px rgba(139,92,246,.7); }
+  .btn:not(.btn-primary):hover{ border-color:var(--violet-2); background:rgba(139,92,246,.08); }
+  .btn.magnetic-active{ transition:box-shadow .25s, border-color .25s, background .25s; }
 
   .hero-skillrow{ opacity:0; transform:translateY(14px); transition:opacity .7s ease .8s, transform .7s cubic-bezier(.16,.84,.44,1) .8s; }
   #hero.ready .hero-skillrow{ opacity:1; transform:translateY(0); }
@@ -139,32 +140,53 @@
   .hero-skillrow .list{ font-size:13.5px; color:var(--muted); }
   .hero-skillrow .list b{ color:var(--ink); font-weight:600; }
 
-  /* signature: spring blob visual */
-  .spring-stage{ position:relative; aspect-ratio:1/1; max-width:440px; margin:0 auto; }
-  .spring-blob{ position:absolute; inset:8%; border-radius:42% 58% 63% 37% / 41% 47% 53% 59%; background:var(--grad-main); filter:blur(2px); box-shadow:0 40px 90px -30px rgba(139,92,246,.55); }
-  @media (prefers-reduced-motion:no-preference){ .spring-blob{ animation:morph 9s ease-in-out infinite; } }
-  @keyframes morph{
-    0%,100%{ border-radius:42% 58% 63% 37% / 41% 47% 53% 59%; }
-    50%{ border-radius:63% 37% 41% 59% / 55% 40% 60% 45%; }
-  }
-  .spring-ring{ position:absolute; inset:0; border-radius:50%; border:1px dashed rgba(168,159,201,.28); }
-  .spring-node{ position:absolute; width:14px; height:14px; border-radius:50%; background:var(--ink); box-shadow:0 0 0 4px rgba(246,243,255,.12); top:50%; left:50%; transform:translate(-50%,-50%); z-index:2; }
-  .spring-readout{ position:absolute; left:50%; bottom:-6px; transform:translateX(-50%); font-size:11.5px; color:var(--muted-dim); white-space:nowrap; background:rgba(20,13,40,.7); border:1px solid var(--line); padding:6px 14px; border-radius:999px; backdrop-filter:blur(8px); }
-  .spring-caption{ text-align:center; margin-top:20px; font-size:12.5px; color:var(--muted-dim); }
-  @media (max-width:940px){ .spring-stage{ max-width:300px; margin-top:10px; } }
+  /* signature: draggable bezier easing-curve editor */
+  .bezier-stage{ position:relative; max-width:440px; margin:0 auto; }
+  .bezier-panel{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 22px 18px; }
+  .bezier-panel-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .bezier-panel-head .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted-dim); }
+  .bezier-panel-head .val{ font-size:11.5px; color:var(--pop); }
+  .bezier-graph{ position:relative; aspect-ratio:1/1; border-radius:14px; background:
+      linear-gradient(rgba(168,159,201,.09) 1px, transparent 1px) 0 0/25% 25%,
+      linear-gradient(90deg, rgba(168,159,201,.09) 1px, transparent 1px) 0 0/25% 25%,
+      #120b24; overflow:visible; touch-action:none; }
+  .bezier-svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .bezier-handle-line{ stroke:rgba(168,159,201,.5); stroke-width:1.5; }
+  .bezier-curve{ fill:none; stroke:url(#curveGrad); stroke-width:3; stroke-linecap:round; }
+  .bezier-handle{ position:absolute; width:20px; height:20px; margin:-10px; border-radius:50%; background:var(--bg); border:2px solid var(--magenta); cursor:grab; touch-action:none; z-index:3; }
+  .bezier-handle:active{ cursor:grabbing; }
+  .bezier-handle.p1{ border-color:var(--violet-2); }
+  .bezier-dot{ position:absolute; width:12px; height:12px; margin:-6px; border-radius:50%; background:var(--pop); box-shadow:0 0 12px 2px rgba(94,234,212,.7); pointer-events:none; z-index:2; }
+  .bezier-anchor{ position:absolute; width:7px; height:7px; margin:-3.5px; border-radius:50%; background:var(--muted-dim); pointer-events:none; }
+  .bezier-caption{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:12px; color:var(--muted-dim); }
+  .bezier-caption button{ font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); background:none; border:1px solid var(--line); padding:6px 12px; border-radius:999px; cursor:pointer; transition:border-color .2s, color .2s; }
+  .bezier-caption button:hover{ border-color:var(--violet-2); color:var(--ink); }
 
-  /* ---------- ticker ---------- */
-  .ticker-wrap{ overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-soft); padding:17px 0; position:relative; z-index:1; }
+  /* floating "layer" chips — parallax depth */
+  .layer-field{ position:relative; height:0; }
+  .layer-chip{ position:absolute; font-size:11px; color:var(--muted); background:rgba(20,13,40,.75); border:1px solid var(--line); padding:7px 13px; border-radius:8px; backdrop-filter:blur(8px); display:flex; align-items:center; gap:7px; white-space:nowrap; will-change:transform; }
+  .layer-chip .sw{ width:8px; height:8px; border-radius:2px; flex-shrink:0; }
+  @media (max-width:940px){ .layer-chip{ display:none; } }
+
+  /* ---------- ticker (dual opposite rows) ---------- */
+  .ticker-wrap{ overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-soft); padding:14px 0; position:relative; z-index:1; display:flex; flex-direction:column; gap:10px; }
   .ticker-track{ display:flex; width:max-content; white-space:nowrap; }
-  @media (prefers-reduced-motion:no-preference){ .ticker-track{ animation:ticker-scroll 26s linear infinite; } }
+  .ticker-track.rev{ animation-direction:reverse; }
+  @media (prefers-reduced-motion:no-preference){
+    .ticker-track{ animation:ticker-scroll 26s linear infinite; }
+    .ticker-track.slow{ animation-duration:34s; }
+  }
   @media (prefers-reduced-motion:reduce){ .ticker-wrap{ overflow-x:auto; } }
-  .ticker-track .t-item{ display:inline-flex; align-items:center; gap:16px; font-family:'Unbounded'; font-size:14px; font-weight:600; color:var(--muted); margin-right:16px; }
+  .ticker-track .t-item{ display:inline-flex; align-items:center; gap:16px; font-family:'Unbounded'; font-size:13.5px; font-weight:600; color:var(--muted); margin-right:16px; }
+  .ticker-track.slow .t-item{ color:var(--muted-dim); font-size:12.5px; }
   .ticker-track .t-item .sep{ color:var(--magenta); font-size:10px; }
+  .ticker-track.slow .t-item .sep{ color:var(--pop); }
   @keyframes ticker-scroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
 
   /* ---------- reveal ---------- */
-  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1); }
-  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .reveal{ opacity:0; transform:translateY(30px) scale(.97); filter:blur(4px); transition:opacity .75s cubic-bezier(.16,.84,.44,1), transform .75s cubic-bezier(.16,.84,.44,1), filter .75s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  @media (prefers-reduced-motion:reduce){ .reveal{ filter:none; } }
 
   .sec-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:52px; flex-wrap:wrap; }
   .sec-tag{ font-size:12px; font-weight:700; color:var(--pop); text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px; display:block; }
@@ -195,7 +217,7 @@
   .spotlight{ position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); cursor:pointer; margin-bottom:46px; background:var(--surface); transition:border-color .3s, transform .4s cubic-bezier(.2,.8,.2,1); }
   .spotlight:hover{ border-color:rgba(139,92,246,.5); transform:translateY(-3px); }
   .spotlight-media{ aspect-ratio:21/9; position:relative; overflow:hidden; background:var(--surface-hi); }
-  .spotlight-media img{ width:100%; height:100%; object-fit:cover; transition:transform .8s ease; }
+  .spotlight-media img{ width:100%; height:112%; object-fit:cover; transition:transform .8s ease; will-change:transform; }
   .spotlight:hover .spotlight-media img{ transform:scale(1.045); }
   .spotlight-media::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,7,20,.96) 0%, rgba(10,7,20,.5) 45%, rgba(10,7,20,.05) 75%); }
   .spotlight-tag{ position:absolute; top:20px; left:20px; z-index:2; display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#160b2c; background:var(--pop); padding:8px 14px; border-radius:999px; }
@@ -267,24 +289,32 @@
   .stat-value{ font-family:'Unbounded'; font-size:clamp(30px,4vw,44px); font-weight:800; background:var(--grad-text); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:8px; }
   .stat-label{ font-size:12.5px; color:var(--muted); }
 
-  /* ---------- process (spine timeline) ---------- */
+  /* ---------- process (animated motion-path spine) ---------- */
   .process-rail{ position:relative; display:flex; flex-direction:column; gap:0; }
-  .process-rail::before{ content:''; position:absolute; left:27px; top:14px; bottom:14px; width:2px; background:linear-gradient(var(--violet), var(--magenta)); opacity:.4; }
-  @media (max-width:640px){ .process-rail::before{ left:19px; } }
-  .process-step{ display:flex; gap:26px; padding:26px 0; }
-  .process-num{ flex-shrink:0; width:56px; height:56px; border-radius:50%; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Unbounded'; font-weight:700; font-size:15px; color:var(--violet-2); position:relative; z-index:1; }
+  .process-rail-line{ position:absolute; left:27px; top:0; bottom:0; width:2px; overflow:visible; }
+  @media (max-width:640px){ .process-rail-line{ left:19px; } }
+  .process-rail-line svg{ position:absolute; top:0; left:-1px; width:4px; height:100%; overflow:visible; }
+  .process-rail-line .track{ stroke:var(--line); stroke-width:2; fill:none; }
+  .process-rail-line .fill{ stroke:url(#processGrad); stroke-width:2; fill:none; stroke-dasharray:1 1; stroke-dashoffset:1; }
+  .process-step{ display:flex; gap:26px; padding:26px 0; position:relative; }
+  .process-num{ flex-shrink:0; width:56px; height:56px; border-radius:50%; background:var(--surface); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Unbounded'; font-weight:700; font-size:15px; color:var(--violet-2); position:relative; z-index:1; transition:border-color .3s, color .3s, transform .3s; }
+  .process-num.hit{ border-color:var(--magenta); color:var(--ink); transform:scale(1.08); }
   @media (max-width:640px){ .process-num{ width:40px; height:40px; font-size:12px; } }
   .process-title{ font-family:'Unbounded'; font-size:19px; font-weight:700; margin-bottom:8px; padding-top:8px; }
   .process-desc{ font-size:14.5px; color:var(--muted); max-width:560px; }
 
-  /* ---------- tools ---------- */
-  .tools-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-  @media (max-width:720px){ .tools-grid{ grid-template-columns:1fr 1fr; } }
-  .tool-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:24px 22px; position:relative; overflow:hidden; transition:transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s; }
+  /* ---------- tools: scroll-scrubbed filmstrip ---------- */
+  .tools-viewport{ overflow:hidden; margin:0 -32px; padding:0 32px; }
+  @media (max-width:720px){ .tools-viewport{ margin:0 -20px; padding:0 20px; overflow-x:auto; } }
+  .tools-track{ display:flex; gap:20px; width:max-content; }
+  .tool-card{ width:230px; flex-shrink:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:24px 22px; position:relative; overflow:hidden; transition:transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s; }
   .tool-card:hover{ transform:translateY(-4px); border-color:var(--tool-grade); }
   .tool-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--tool-grade); }
   .tool-name{ font-family:'Unbounded'; font-size:15.5px; font-weight:700; margin-bottom:8px; margin-top:6px; }
   .tool-detail{ font-size:12px; color:var(--muted); }
+  .tools-scrub-track{ height:2px; background:var(--line); border-radius:2px; margin-top:30px; position:relative; overflow:hidden; }
+  .tools-scrub-fill{ position:absolute; top:0; left:0; height:100%; width:22%; background:var(--grad-main); border-radius:2px; }
+  @media (max-width:720px){ .tools-scrub-track{ display:none; } }
 
   /* ---------- about ---------- */
   .about-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start; }
@@ -401,6 +431,13 @@
 </div>
 
 <section id="hero">
+  <div class="layer-field" aria-hidden="true" id="layerField">
+    <div class="layer-chip" data-depth="0.7" style="top:-320px; left:6%;"><span class="sw" style="background:var(--violet-2)"></span>BG_gradient.ai</div>
+    <div class="layer-chip" data-depth="1.3" style="top:-250px; left:82%;"><span class="sw" style="background:var(--magenta)"></span>Logo_rig · null</div>
+    <div class="layer-chip" data-depth="0.5" style="top:-90px; left:2%;"><span class="sw" style="background:var(--pop)"></span>Type_01 · spring</div>
+    <div class="layer-chip" data-depth="1.1" style="top:40px; left:88%;"><span class="sw" style="background:var(--amber)"></span>Grade · violet 02</div>
+    <div class="layer-chip" data-depth="0.9" style="top:210px; left:4%;"><span class="sw" style="background:var(--violet)"></span>Camera_01 · parallax</div>
+  </div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -408,9 +445,9 @@
         <h1 id="heroTitle">Cargando…</h1>
         <p class="lede" id="heroSubtitle"></p>
         <div class="hero-actions">
-          <a href="#trabajo" class="btn btn-primary">Ver proyectos</a>
-          <a href="#contacto" class="btn">Hablemos ↗</a>
-          <a href="#" class="btn" id="heroCvBtn" style="display:none;" target="_blank" rel="noopener">Descargar CV ↓</a>
+          <a href="#trabajo" class="btn btn-primary" data-magnetic>Ver proyectos</a>
+          <a href="#contacto" class="btn" data-magnetic>Hablemos ↗</a>
+          <a href="#" class="btn" id="heroCvBtn" style="display:none;" target="_blank" rel="noopener" data-magnetic>Descargar CV ↓</a>
         </div>
         <div class="hero-skillrow">
           <div class="lbl">Stack principal</div>
@@ -418,13 +455,36 @@
         </div>
       </div>
       <div>
-        <div class="spring-stage" aria-hidden="true">
-          <div class="spring-ring"></div>
-          <div class="spring-blob" id="springBlob"></div>
-          <div class="spring-node" id="springNode"></div>
-          <div class="spring-readout mono" id="springReadout">spring(1, 80, 12, 0)</div>
+        <div class="bezier-stage">
+          <div class="bezier-panel">
+            <div class="bezier-panel-head">
+              <span class="lbl mono">Curva de animación</span>
+              <span class="val mono" id="bezierValue">.42, 0, .58, 1</span>
+            </div>
+            <div class="bezier-graph" id="bezierGraph">
+              <svg class="bezier-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="curveGrad" x1="0" y1="1" x2="1" y2="0">
+                    <stop offset="0" stop-color="#a78bfa"/>
+                    <stop offset="1" stop-color="#e879f9"/>
+                  </linearGradient>
+                </defs>
+                <line class="bezier-handle-line" id="hl1" x1="0" y1="100" x2="42" y2="100"/>
+                <line class="bezier-handle-line" id="hl2" x1="100" y1="0" x2="58" y2="0"/>
+                <path class="bezier-curve" id="bezierPath" d="M0,100 C42,100 58,0 100,0"/>
+              </svg>
+              <div class="bezier-anchor" style="left:0%; top:100%;"></div>
+              <div class="bezier-anchor" style="left:100%; top:0%;"></div>
+              <div class="bezier-handle p1" id="bezierP1" style="left:42%; top:100%;" tabindex="0" role="slider" aria-label="Punto de control 1"></div>
+              <div class="bezier-handle p2" id="bezierP2" style="left:58%; top:0%;" tabindex="0" role="slider" aria-label="Punto de control 2"></div>
+              <div class="bezier-dot" id="bezierDot" style="left:0%; top:100%;"></div>
+            </div>
+            <div class="bezier-caption">
+              <span>Arrastra los puntos — así ajusto el timing en After Effects</span>
+              <button type="button" id="bezierReplay">Replay ↻</button>
+            </div>
+          </div>
         </div>
-        <div class="spring-caption">Rig de física spring — la misma lógica que uso en mis expresiones de After Effects</div>
       </div>
     </div>
   </div>
@@ -432,6 +492,7 @@
 
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track mono" id="tickerTrack"></div>
+  <div class="ticker-track mono rev slow" id="tickerTrack2"></div>
 </div>
 
 <section id="servicios">
@@ -479,14 +540,26 @@
 <section id="proceso">
   <div class="wrap">
     <div class="sec-head reveal"><div><span class="sec-tag">Metodología</span><h2>Proceso</h2></div></div>
-    <div class="process-rail" id="processRail"></div>
+    <div class="process-rail">
+      <div class="process-rail-line">
+        <svg viewBox="0 0 4 100" preserveAspectRatio="none">
+          <defs><linearGradient id="processGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#e879f9"/></linearGradient></defs>
+          <line class="track" x1="2" y1="0" x2="2" y2="100"/>
+          <line class="fill" id="processFill" x1="2" y1="0" x2="2" y2="100" pathLength="1"/>
+        </svg>
+      </div>
+      <div id="processRail"></div>
+    </div>
   </div>
 </section>
 
 <section id="herramientas">
   <div class="wrap">
     <div class="sec-head reveal"><div><span class="sec-tag">Toolkit</span><h2>Herramientas</h2></div></div>
-    <div class="tools-grid" id="toolsGrid"></div>
+    <div class="tools-viewport">
+      <div class="tools-track" id="toolsGrid"></div>
+    </div>
+    <div class="tools-scrub-track" aria-hidden="true"><div class="tools-scrub-fill" id="toolsScrubFill"></div></div>
   </div>
 </section>
 
@@ -564,6 +637,8 @@
 </button>
 <div id="errorBanner">No se pudo cargar el contenido. Revisa data.json.</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* =========================================================
    Este sitio lee TODO su contenido desde data.json, que
@@ -632,6 +707,9 @@ function renderAll(){
   const tickerItems = state.skills.map(s=>s.name).concat(['Disponible para freelance','Motion Graphics','UI / UX Motion','After Effects']);
   const tickerHtml = tickerItems.map(t=>`<span class="t-item">${escapeHtml(t)}<span class="sep">✦</span></span>`).join('');
   document.getElementById('tickerTrack').innerHTML = tickerHtml + tickerHtml;
+  const tickerItems2 = (state.services||[]).map(s=>s.title).concat(state.projects.map(p=>p.cat));
+  const tickerHtml2 = (tickerItems2.length?tickerItems2:tickerItems).map(t=>`<span class="t-item">${escapeHtml(t)}<span class="sep">✦</span></span>`).join('');
+  document.getElementById('tickerTrack2').innerHTML = tickerHtml2 + tickerHtml2;
 
   if(Array.isArray(state.process)){
     document.getElementById('processRail').innerHTML = state.process.map((s,i)=>`
@@ -652,10 +730,11 @@ function renderAll(){
   if(Array.isArray(state.tools)){
     const gradeMap = { 'grade-a':'var(--grade-a)', 'grade-b':'var(--grade-b)', 'grade-c':'var(--grade-c)', 'grade-d':'var(--grade-d)' };
     document.getElementById('toolsGrid').innerHTML = state.tools.map(t=>`
-      <div class="tool-card reveal" style="--tool-grade:${gradeMap[t.grade]||'var(--grade-b)'}">
+      <div class="tool-card" style="--tool-grade:${gradeMap[t.grade]||'var(--grade-b)'}">
         <div class="tool-name">${escapeHtml(t.name)}</div>
         <div class="tool-detail mono">${escapeHtml(t.detail||'')}</div>
       </div>`).join('');
+    bindToolsScrub();
   }
 
   if(state.availability){
@@ -691,6 +770,9 @@ function renderAll(){
   renderUpcoming();
   bindReveal();
   bindStatCounters();
+  bindMagnetic();
+  bindProcessLine();
+  bindSpotlightParallax();
 
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     document.getElementById('hero').classList.add('ready');
@@ -895,48 +977,197 @@ if(isFinePointer && !prefersReducedMotion){
   if(glow) glow.style.display = 'none';
 }
 
-/* ---------- hero spring blob: real spring physics, driven by pointer within stage ---------- */
+/* ---------- hero signature: draggable bezier easing-curve editor ---------- */
 (function(){
-  const stage = document.querySelector('.spring-stage');
-  const node = document.getElementById('springNode');
-  const readout = document.getElementById('springReadout');
-  if(!stage || !node) return;
-  if(prefersReducedMotion){ return; }
-  let px = 0, py = 0, vx = 0, vy = 0, tx = 0, ty = 0;
-  const k = 0.085, damp = 0.82;
-  let lastTargetSet = performance.now();
-  function setTargetFromEvent(e){
-    const r = stage.getBoundingClientRect();
-    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
-    tx = Math.max(-1, Math.min(1, tx));
-    ty = Math.max(-1, Math.min(1, ty));
-    lastTargetSet = performance.now();
+  const graph = document.getElementById('bezierGraph');
+  const p1 = document.getElementById('bezierP1');
+  const p2 = document.getElementById('bezierP2');
+  const path = document.getElementById('bezierPath');
+  const hl1 = document.getElementById('hl1');
+  const hl2 = document.getElementById('hl2');
+  const dot = document.getElementById('bezierDot');
+  const valueEl = document.getElementById('bezierValue');
+  const replayBtn = document.getElementById('bezierReplay');
+  if(!graph || !p1 || !p2) return;
+
+  let pt1 = { x:42, y:100 }; // css % (top-based, 100=bottom)
+  let pt2 = { x:58, y:0 };
+
+  function toCssBezierY(topPct){ return (1 - topPct/100).toFixed(2); }
+  function render(){
+    p1.style.left = pt1.x+'%'; p1.style.top = pt1.y+'%';
+    p2.style.left = pt2.x+'%'; p2.style.top = pt2.y+'%';
+    path.setAttribute('d', `M0,100 C${pt1.x},${pt1.y} ${pt2.x},${pt2.y} 100,0`);
+    hl1.setAttribute('x2', pt1.x); hl1.setAttribute('y2', pt1.y);
+    hl2.setAttribute('x2', pt2.x); hl2.setAttribute('y2', pt2.y);
+    if(valueEl) valueEl.textContent = `${(pt1.x/100).toFixed(2)}, ${toCssBezierY(pt1.y)}, ${(pt2.x/100).toFixed(2)}, ${toCssBezierY(pt2.y)}`;
   }
+  render();
+
+  function bindDrag(handle, pt){
+    let dragging = false;
+    function move(clientX, clientY){
+      const r = graph.getBoundingClientRect();
+      let x = ((clientX - r.left) / r.width) * 100;
+      let y = ((clientY - r.top) / r.height) * 100;
+      pt.x = Math.max(-20, Math.min(120, x));
+      pt.y = Math.max(-60, Math.min(160, y));
+      render();
+    }
+    handle.addEventListener('pointerdown', e=>{ dragging = true; handle.setPointerCapture(e.pointerId); });
+    handle.addEventListener('pointermove', e=>{ if(dragging) move(e.clientX, e.clientY); });
+    handle.addEventListener('pointerup', ()=> dragging = false);
+    handle.addEventListener('pointercancel', ()=> dragging = false);
+  }
+  bindDrag(p1, pt1);
+  bindDrag(p2, pt2);
+
+  // cubic bezier evaluation (De Casteljau) for the traveling dot
+  function cubic(t, a,b,c,d){ const u=1-t; return u*u*u*a + 3*u*u*t*b + 3*u*t*t*c + t*t*t*d; }
+  let raf = null;
+  function playOnce(){
+    if(prefersReducedMotion){ dot.style.left='100%'; dot.style.top='0%'; return; }
+    cancelAnimationFrame(raf);
+    const dur = 1600, start = performance.now();
+    function step(now){
+      const t = Math.min(1, (now-start)/dur);
+      const x = cubic(t, 0, pt1.x, pt2.x, 100);
+      const y = cubic(t, 100, pt1.y, pt2.y, 0);
+      dot.style.left = x+'%'; dot.style.top = y+'%';
+      if(t < 1) raf = requestAnimationFrame(step);
+      else setTimeout(playOnce, 900);
+    }
+    raf = requestAnimationFrame(step);
+  }
+  playOnce();
+  if(replayBtn) replayBtn.addEventListener('click', playOnce);
+})();
+
+/* ---------- floating layer chips: parallax on mouse + scroll ---------- */
+(function(){
+  const field = document.getElementById('layerField');
+  if(!field || prefersReducedMotion) return;
+  const chips = Array.from(field.querySelectorAll('.layer-chip'));
+  if(!chips.length) return;
+  let mx = 0, my = 0;
   if(isFinePointer){
-    stage.addEventListener('mousemove', setTargetFromEvent);
-    stage.addEventListener('mouseleave', ()=>{ tx = 0; ty = 0; });
+    document.getElementById('hero').addEventListener('mousemove', e=>{
+      const r = document.getElementById('hero').getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+      my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    });
   }
-  function ambient(t){
-    // gentle idle drift so the rig feels alive even without pointer input
-    return { x: Math.sin(t/2200)*0.5, y: Math.cos(t/2600)*0.4 };
-  }
-  function tick(t){
-    const idleFor = t - lastTargetSet;
-    let targetX = tx, targetY = ty;
-    if(idleFor > 1800){ const a = ambient(t); targetX = a.x; targetY = a.y; }
-    const ax = (targetX - px) * k;
-    const ay = (targetY - py) * k;
-    vx = (vx + ax) * damp; vy = (vy + ay) * damp;
-    px += vx; py += vy;
-    const maxOffset = stage.clientWidth * 0.28;
-    node.style.transform = `translate(${-50+((px*maxOffset)/stage.clientWidth*100)}%, ${-50+((py*maxOffset)/stage.clientHeight*100)}%)`;
-    const blob = document.getElementById('springBlob');
-    if(blob) blob.style.transform = `translate(${px*maxOffset*0.5}px, ${py*maxOffset*0.5}px)`;
-    if(readout) readout.textContent = `spring · v ${Math.abs(vx*10+vy*10).toFixed(2)}`;
+  function tick(){
+    const scrollY = window.scrollY;
+    chips.forEach(chip=>{
+      const depth = parseFloat(chip.dataset.depth) || 1;
+      const sx = mx * 14 * depth;
+      const sy = my * 14 * depth + scrollY * 0.06 * depth;
+      chip.style.transform = `translate(${sx}px, ${sy}px)`;
+    });
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  tick();
+})();
+
+/* ---------- magnetic buttons ---------- */
+function bindMagnetic(){
+  if(!isFinePointer || prefersReducedMotion) return;
+  document.querySelectorAll('[data-magnetic]').forEach(btn=>{
+    if(btn.dataset.magneticBound) return;
+    btn.dataset.magneticBound = '1';
+    btn.addEventListener('mousemove', e=>{
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2) * 0.28;
+      const y = (e.clientY - r.top - r.height/2) * 0.5;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
+  });
+}
+bindMagnetic();
+
+/* ---------- process: animated draw-line + step highlight ---------- */
+function bindProcessLine(){
+  const rail = document.querySelector('.process-rail');
+  const fill = document.getElementById('processFill');
+  const nums = document.querySelectorAll('.process-num');
+  if(!rail || !fill) return;
+  function update(){
+    const r = rail.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const start = vh * 0.85, end = vh * 0.25;
+    const total = r.height;
+    let progressPx = (start - r.top);
+    progressPx = Math.max(0, Math.min(total, progressPx));
+    const pct = total ? progressPx/total : 0;
+    fill.style.strokeDashoffset = String(1 - pct);
+    nums.forEach(n=>{
+      const nr = n.getBoundingClientRect();
+      const railTop = r.top;
+      const relTop = (nr.top + nr.height/2) - railTop;
+      const relPct = total ? relTop/total : 0;
+      n.classList.toggle('hit', pct >= relPct - 0.02);
+    });
+  }
+  document.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ---------- tools: horizontal scroll-scrubbed filmstrip ---------- */
+function bindToolsScrub(){
+  const section = document.getElementById('herramientas');
+  const viewport = document.querySelector('.tools-viewport');
+  const track = document.getElementById('toolsGrid');
+  const scrubFill = document.getElementById('toolsScrubFill');
+  if(!section || !viewport || !track) return;
+  if(window.matchMedia('(max-width:720px)').matches) return; // native horizontal scroll on mobile
+  function update(){
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = r.height - vh;
+    let pct = total > 0 ? (-r.top) / total : 0;
+    pct = Math.max(0, Math.min(1, pct));
+    const maxScroll = Math.max(0, track.scrollWidth - viewport.clientWidth);
+    if(!prefersReducedMotion) track.style.transform = `translateX(${-pct*maxScroll}px)`;
+    if(scrubFill) scrubFill.style.width = (14 + pct*86) + '%';
+  }
+  document.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ---------- spotlight image parallax ---------- */
+function bindSpotlightParallax(){
+  const img = document.querySelector('.spotlight-media img');
+  if(!img || prefersReducedMotion) return;
+  const media = img.closest('.spotlight-media');
+  function update(){
+    const r = media.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const center = r.top + r.height/2 - vh/2;
+    const shift = Math.max(-30, Math.min(30, -center * 0.06));
+    img.style.transform = `translateY(${shift}px)`;
+  }
+  document.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+/* ---------- kinetic hero headline on scroll ---------- */
+(function(){
+  const hero = document.getElementById('hero');
+  if(!hero || prefersReducedMotion) return;
+  const inner = hero.querySelector('.hero-grid');
+  function update(){
+    const y = window.scrollY;
+    const fade = Math.max(0, 1 - y/500);
+    inner.style.opacity = fade.toFixed(2);
+    inner.style.transform = `translateY(${y*0.15}px)`;
+  }
+  document.addEventListener('scroll', update, { passive:true });
+  update();
 })();
 
 /* ---------- contact form ---------- */
