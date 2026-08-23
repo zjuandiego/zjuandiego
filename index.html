@@ -182,12 +182,11 @@ body.menu-locked{ overflow:hidden; }
 .reel-card{ flex:0 0 auto; width:250px; scroll-snap-align:start; }
 .reel-tape{ font-family:'Space Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:.05em; background:var(--yellow); color:var(--ink); padding:6px 12px; border:2px solid var(--ink); border-bottom:none; transform:rotate(-1.2deg); display:inline-block; margin-left:14px; margin-bottom:-2px; position:relative; z-index:2; max-width:88%; }
 .reel-body{ position:relative; aspect-ratio:9/16; background:#000; border:2px solid var(--ink); border-radius:10px; overflow:hidden; box-shadow:6px 6px 0 var(--ink); }
-/* El iframe se escala y se centra por encima del tamaño real del contenedor:
-   así el botón de play, el logo y la barra de controles nativos del
-   reproductor (Vimeo/YouTube) quedan recortados fuera del área visible.
-   pointer-events:none los desactiva por completo: son piezas puramente
-   ambientales, en loop, sin ninguna interacción posible. */
-.reel-body iframe{ position:absolute; top:50%; left:50%; width:150%; height:150%; transform:translate(-50%,-50%); border:0; pointer-events:none; }
+/* El video ocupa el 100% del marco, sin recorte ni zoom: los parámetros del
+   embed (autoplay silenciado, sin controles) son los que evitan que aparezca
+   el botón de play. pointer-events:none lo deja como pieza puramente
+   ambiental, en loop, sin ninguna interacción posible. */
+.reel-body iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none; }
 .reel-body .placeholder{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:
     repeating-linear-gradient(135deg, #1a1a1c 0 14px, #202022 14px 28px); }
 .reel-body .placeholder .stamp{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--paper); border:2px solid var(--paper); padding:8px 14px; border-radius:4px; text-transform:uppercase; transform:rotate(-8deg); }
@@ -601,7 +600,7 @@ function bgEmbedSrc(url){
   const v = parseVideo(url);
   if(!v) return null;
   if(v.provider==='vimeo') return `https://player.vimeo.com/video/${v.id}?background=1&autoplay=1&muted=1&loop=1&autopause=0`;
-  if(v.provider==='youtube') return `https://www.youtube.com/embed/${v.id}?autoplay=1&mute=1&loop=1&playlist=${v.id}&controls=0&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3`;
+  if(v.provider==='youtube') return `https://www.youtube.com/embed/${v.id}?autoplay=1&mute=1&loop=1&playlist=${v.id}&controls=0&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&vq=hd1080`;
   return v.id;
 }
 function playEmbedSrc(url){
