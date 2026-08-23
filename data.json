@@ -253,6 +253,21 @@
         "After Effects",
         "Motion Graphics"
       ]
+    },
+    {
+      "id": "p8",
+      "title": "Reel vertical — [Edita este título]",
+      "cat": "Motion Graphics · Reels",
+      "tc": "00:00",
+      "orientation": "vertical",
+      "img": "",
+      "video": "https://youtube.com/shorts/BCi7bp3QDBg",
+      "link": "",
+      "desc": "Reel vertical para redes sociales. Edita esta descripción con el detalle real del proyecto (marca, herramientas, objetivo).",
+      "tags": [
+        "After Effects",
+        "Motion Graphics"
+      ]
     }
   ],
   "upcoming": [
