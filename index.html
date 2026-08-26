@@ -130,21 +130,6 @@ body.menu-locked{ overflow:hidden; }
 .hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; position:relative; z-index:1; }
 @media (max-width:980px){ .hero-grid{ grid-template-columns:1fr; gap:44px; } }
 
-/* ---------- miniaturas flotantes: adelanto de proyectos, decorativas, sin reproducción ---------- */
-.hero-float-thumbs{ position:absolute; inset:0; z-index:0; pointer-events:none; }
-.float-thumb{ position:absolute; border:2px solid var(--ink); border-radius:6px; overflow:hidden; background:var(--paper); box-shadow:5px 5px 0 var(--ink); animation:float-drift var(--fdur,7s) ease-in-out infinite; animation-delay:var(--fdelay,0s); will-change:transform; }
-.float-thumb img{ display:block; width:100%; height:100%; object-fit:cover; filter:saturate(.92); }
-@keyframes float-drift{ 0%,100%{ transform:translateY(0) rotate(var(--frot1,-5deg)); } 50%{ transform:translateY(-16px) rotate(var(--frot2,-1deg)); } }
-@media (prefers-reduced-motion:reduce){ .float-thumb{ animation:none; } }
-
-.float-thumb-1{ top:4%; left:1.5%; width:110px; height:86px; --frot1:-7deg; --frot2:-3deg; --fdur:6.5s; --fdelay:0s; z-index:2; }
-.float-thumb-2{ top:60%; left:2%; width:90px; height:118px; --frot1:6deg; --frot2:9deg; --fdur:8s; --fdelay:.9s; z-index:2; }
-.float-thumb-3{ top:6%; right:3%; width:84px; height:110px; --frot1:-4deg; --frot2:0deg; --fdur:7.2s; --fdelay:.4s; z-index:2; }
-.float-thumb-4{ top:56%; right:2%; width:132px; height:88px; --frot1:5deg; --frot2:8deg; --fdur:9s; --fdelay:1.5s; z-index:2; }
-
-@media (max-width:1180px){ .float-thumb-1{ width:90px; height:70px; } .float-thumb-2{ width:74px; height:96px; } .float-thumb-3{ width:70px; height:92px; } .float-thumb-4{ width:106px; height:70px; } }
-@media (max-width:980px){ .hero-float-thumbs{ display:none; } }
-
 .hero-copy .eyebrow{ margin-bottom:22px; opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s cubic-bezier(.16,.84,.44,1); }
 #hero.ready .hero-copy .eyebrow{ opacity:1; transform:translateY(0); }
 #hero h1{ font-size:clamp(40px,6.6vw,84px); margin-bottom:28px; }
@@ -163,23 +148,6 @@ body.menu-locked{ overflow:hidden; }
 .hero-monitor{ position:relative; opacity:0; transform:translateY(18px) scale(.98); transition:opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1); transition-delay:.2s; }
 #hero.ready .hero-monitor{ opacity:1; transform:translateY(0) scale(1); }
 .monitor-frame{ position:relative; z-index:1; background:var(--paper); border:2px solid var(--paper); border-radius:10px; padding:14px 14px 20px; box-shadow:8px 8px 0 var(--red); }
-
-/* ---------- decoración After Effects: órbita de keyframes + anchor point ---------- */
-.hero-ae-deco{ position:absolute; top:50%; left:50%; width:132%; aspect-ratio:1/1; transform:translate(-50%,-50%); z-index:0; pointer-events:none; }
-@media (max-width:980px){ .hero-ae-deco{ width:108%; } }
-.ae-orbit{ width:100%; height:100%; display:block; animation:ae-spin 38s linear infinite; }
-@keyframes ae-spin{ to{ transform:rotate(360deg); } }
-.ae-anchor{ position:absolute; top:50%; left:50%; width:16px; height:16px; transform:translate(-50%,-50%); border:2px solid var(--ink); border-radius:50%; background:var(--paper); }
-.ae-anchor::before,.ae-anchor::after{ content:''; position:absolute; background:var(--ink); }
-.ae-anchor::before{ top:50%; left:-11px; right:-11px; height:1.5px; transform:translateY(-50%); }
-.ae-anchor::after{ left:50%; top:-11px; bottom:-11px; width:1.5px; transform:translateX(-50%); }
-.ae-tag{ position:absolute; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.05em; color:var(--ink-soft); background:rgba(10,11,14,.78); border:1.5px solid var(--ink); border-radius:20px; padding:4px 10px; animation:ae-float 5.5s ease-in-out infinite; white-space:nowrap; }
-.ae-tag-1{ top:-4%; left:8%; animation-delay:0s; }
-.ae-tag-2{ bottom:6%; left:-9%; animation-delay:1.3s; }
-.ae-tag-3{ bottom:-5%; right:2%; animation-delay:2.6s; }
-@media (max-width:980px){ .ae-tag-2{ left:-2%; } .ae-tag-3{ right:-2%; } }
-@keyframes ae-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
-@media (prefers-reduced-motion:reduce){ .ae-orbit{ animation:none; } .ae-tag{ animation:none; } }
 .monitor-screen{ position:relative; aspect-ratio:4/3; background:#000; border-radius:3px; overflow:hidden; }
 .monitor-screen iframe, .monitor-screen video{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 .monitor-screen .noplay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#6b6d66; font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; }
@@ -407,12 +375,6 @@ footer{ background:var(--paper-alt); padding:0; }
 
 <!-- ================= HERO ================= -->
 <section id="hero">
-  <div class="hero-float-thumbs" id="heroFloatThumbs" aria-hidden="true">
-    <div class="float-thumb float-thumb-1"><img alt="" loading="lazy"></div>
-    <div class="float-thumb float-thumb-2"><img alt="" loading="lazy"></div>
-    <div class="float-thumb float-thumb-3"><img alt="" loading="lazy"></div>
-    <div class="float-thumb float-thumb-4"><img alt="" loading="lazy"></div>
-  </div>
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
@@ -426,18 +388,6 @@ footer{ background:var(--paper-alt); padding:0; }
         </div>
       </div>
       <div class="hero-monitor">
-        <div class="hero-ae-deco" aria-hidden="true">
-          <svg class="ae-orbit" viewBox="0 0 300 300">
-            <circle cx="150" cy="150" r="130" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="2 11" opacity=".38"/>
-            <rect x="141" y="12" width="18" height="18" fill="var(--yellow)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 150 21)"/>
-            <rect x="269" y="141" width="18" height="18" fill="var(--red)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 278 150)"/>
-            <rect x="13" y="141" width="18" height="18" fill="#26C6D1" stroke="var(--ink)" stroke-width="2" transform="rotate(45 22 150)"/>
-          </svg>
-          <div class="ae-anchor"></div>
-          <div class="ae-tag ae-tag-1 mono">wiggle()</div>
-          <div class="ae-tag ae-tag-2 mono">ease</div>
-          <div class="ae-tag ae-tag-3 mono">spring()</div>
-        </div>
         <div class="monitor-frame">
           <div class="monitor-screen" id="heroScreen">
             <div class="noplay mono">Cargando señal…</div>
@@ -752,20 +702,6 @@ function setupTicker(){
 }
 
 /* ---------- reel wall ---------- */
-function renderHeroFloatThumbs(){
-  const wrap = document.getElementById('heroFloatThumbs');
-  if(!wrap) return;
-  const thumbs = (state.heroThumbs||[]).filter(t=>t && t.img);
-  const slots = wrap.querySelectorAll('.float-thumb');
-  slots.forEach((slot, i)=>{
-    const data = thumbs[i];
-    if(!data){ slot.style.display='none'; return; }
-    const img = slot.querySelector('img');
-    img.src = data.img;
-    img.alt = data.alt || '';
-  });
-}
-
 function renderReels(){
   const scroller = document.getElementById('reelScroller');
   const vertical = (state.projects||[]).filter(p=>p.orientation==='vertical' && p.video);
@@ -1115,7 +1051,6 @@ function bindReveal(){
     await loadData();
     setupHeroTitle();
     setupHeroMonitor();
-    renderHeroFloatThumbs();
     setupTicker();
     renderReels();
     renderWork();
