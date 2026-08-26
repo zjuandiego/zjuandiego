@@ -1,16 +1,10 @@
 {
   "hero": {
-    "title": "Juan Jaramillo.",
+    "title": "Diseño con movimiento, historias con propósito.",
     "subtitle": "Soy diseñador gráfico y productor multimedia especializado en motion graphics con After Effects: animación de interfaces, rigs con expresiones y piezas de marca que se sienten vivas."
   },
-  "heroThumbs": [
-    { "img": "https://picsum.photos/seed/motionreel1/300/240" },
-    { "img": "https://picsum.photos/seed/motionreel2/240/300" },
-    { "img": "https://picsum.photos/seed/motionreel3/240/300" },
-    { "img": "https://picsum.photos/seed/motionreel4/300/220" }
-  ],
   "about": {
-    "text": "Llevo más de tres años trabajando como freelance en motion graphics, con foco en rigging y expresiones avanzadas en After Effects. También he trabajado en proyectos de agencia simulada, liderando la parte de diseño multimedia: logos animados, cortinillas y piezas para TV."
+    "text": "Llevo más de tres años trabajando como freelance en motion graphics, con foco en Motion Graphics, expresiones avanzadas. También he trabajado en proyectos de agencia simulada, liderando la parte de diseño multimedia: logos animados, cortinillas y piezas para TV."
   },
   "footerName": "Juan Jaramillo",
   "formEndpoint": "https://formspree.io/f/xnpawopr",
@@ -186,7 +180,7 @@
     },
     {
       "id": "p2",
-      "title": "Animación de logo — Folder House",
+      "title": "Animación de logo - Folder House",
       "cat": "Motion Graphics",
       "tc": "00:45",
       "img": "Folder.png",
