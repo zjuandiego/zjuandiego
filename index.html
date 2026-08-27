@@ -68,11 +68,6 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 }
 
 /* ---------- cursor personalizado (solo dispositivos con mouse) ---------- */
-.has-custom-cursor, .has-custom-cursor a, .has-custom-cursor button, .has-custom-cursor .work-row{ cursor:none; }
-.cur-dot{ position:fixed; top:0; left:0; width:6px; height:6px; margin:-3px; border-radius:50%; background:var(--red); z-index:1200; pointer-events:none; transition:opacity .2s ease; }
-.cur-ring{ position:fixed; top:0; left:0; width:38px; height:38px; margin:-19px; border-radius:50%; border:1.5px solid var(--ink); z-index:1199; pointer-events:none; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); transition:width .25s var(--ease), height .25s var(--ease), margin .25s var(--ease), background .25s ease, border-color .25s ease; }
-.cur-ring.is-active{ width:56px; height:56px; margin:-28px; border-color:var(--red); }
-.cur-ring.is-view{ width:74px; height:74px; margin:-37px; background:var(--red); border-color:var(--red); color:var(--paper); font-weight:800; }
 
 /* ---------- reveal on scroll ---------- */
 .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
@@ -223,6 +218,20 @@ section{ position:relative; padding:120px 0; }
 @media (min-width:640px){ .wu-cat{ display:block; } }
 .wu-eta{ font-size:11px; color:var(--yellow); text-transform:uppercase; flex-shrink:0; }
 
+/* ================= REELS: video en loop ================= */
+.reel-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:20px; }
+.reel-card{ border-radius:12px; overflow:hidden; border:1px solid rgba(236,238,230,.14); background:var(--white); transition:transform .4s var(--ease), border-color .3s ease; }
+.reel-card:hover{ transform:translateY(-6px); border-color:var(--red); }
+.reel-body{ position:relative; aspect-ratio:9/16; background:#000; overflow:hidden; }
+.reel-body iframe, .reel-body video{ position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none; }
+.reel-placeholder{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:14px; font-size:11px; text-transform:uppercase; color:var(--ink-soft); background:repeating-linear-gradient(135deg,#161719 0 14px,#1c1d20 14px 28px); }
+.reel-loop-tag{ position:absolute; top:10px; left:10px; z-index:2; display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.55); padding:5px 10px; border-radius:16px; font-size:9px; color:#fff; letter-spacing:.05em; text-transform:uppercase; }
+.reel-loop-tag .dot{ width:6px; height:6px; border-radius:50%; background:var(--red); flex-shrink:0; }
+@media (prefers-reduced-motion:no-preference){ .reel-loop-tag .dot{ animation:blink 1.4s ease-in-out infinite; } }
+.reel-info{ padding:14px 16px; }
+.reel-title{ display:block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; margin-bottom:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.reel-cat{ font-size:10px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; }
+
 /* ================= SERVICIOS: tarjetas spotlight ================= */
 #servicios{ background:var(--paper-alt); }
 .service-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:rgba(236,238,230,.12); border:1px solid rgba(236,238,230,.12); border-radius:14px; overflow:hidden; }
@@ -338,6 +347,7 @@ footer{ background:var(--paper-alt); padding-top:0; }
     <a href="#hero" class="nav-brand"><span class="sq"></span>JJ · MOTION</a>
     <nav class="nav-links">
       <a href="#trabajo" data-target="trabajo">Trabajo</a>
+      <a href="#reels" data-target="reels">Reels</a>
       <a href="#servicios" data-target="servicios">Servicios</a>
       <a href="#proceso" data-target="proceso">Proceso</a>
       <a href="#sobre-mi" data-target="sobre-mi">Sobre mí</a>
@@ -356,11 +366,12 @@ footer{ background:var(--paper-alt); padding-top:0; }
   <div class="mobile-menu-list">
     <a class="mlink" data-target="hero"><span class="num mono">00</span><span class="label">Inicio</span></a>
     <a class="mlink" data-target="trabajo"><span class="num mono">01</span><span class="label">Trabajo</span></a>
-    <a class="mlink" data-target="servicios"><span class="num mono">02</span><span class="label">Servicios</span></a>
-    <a class="mlink" data-target="proceso"><span class="num mono">03</span><span class="label">Proceso</span></a>
-    <a class="mlink" data-target="sobre-mi"><span class="num mono">04</span><span class="label">Sobre mí</span></a>
-    <a class="mlink" data-target="faq"><span class="num mono">05</span><span class="label">FAQ</span></a>
-    <a class="mlink" data-target="contacto"><span class="num mono">06</span><span class="label">Contacto</span></a>
+    <a class="mlink" data-target="reels"><span class="num mono">02</span><span class="label">Reels</span></a>
+    <a class="mlink" data-target="servicios"><span class="num mono">03</span><span class="label">Servicios</span></a>
+    <a class="mlink" data-target="proceso"><span class="num mono">04</span><span class="label">Proceso</span></a>
+    <a class="mlink" data-target="sobre-mi"><span class="num mono">05</span><span class="label">Sobre mí</span></a>
+    <a class="mlink" data-target="faq"><span class="num mono">06</span><span class="label">FAQ</span></a>
+    <a class="mlink" data-target="contacto"><span class="num mono">07</span><span class="label">Contacto</span></a>
   </div>
   <div class="mobile-menu-foot">Juan Jaramillo — Motion &amp; Multimedia</div>
 </div>
@@ -381,11 +392,12 @@ footer{ background:var(--paper-alt); padding-top:0; }
 
     <nav class="hero-index" aria-label="Secciones del sitio">
       <a href="#trabajo" class="hero-index-row"><span class="hero-index-num mono">01</span><span class="hero-index-label">Trabajo</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Proyectos</span></a>
-      <a href="#servicios" class="hero-index-row"><span class="hero-index-num mono">02</span><span class="hero-index-label">Servicios</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Qué hago</span></a>
-      <a href="#proceso" class="hero-index-row"><span class="hero-index-num mono">03</span><span class="hero-index-label">Proceso</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cómo trabajo</span></a>
-      <a href="#sobre-mi" class="hero-index-row"><span class="hero-index-num mono">04</span><span class="hero-index-label">Sobre mí</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Perfil</span></a>
-      <a href="#faq" class="hero-index-row"><span class="hero-index-num mono">05</span><span class="hero-index-label">FAQ</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Dudas</span></a>
-      <a href="#contacto" class="hero-index-row"><span class="hero-index-num mono">06</span><span class="hero-index-label">Contacto</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cotizar</span></a>
+      <a href="#reels" class="hero-index-row"><span class="hero-index-num mono">02</span><span class="hero-index-label">Reels</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">En loop</span></a>
+      <a href="#servicios" class="hero-index-row"><span class="hero-index-num mono">03</span><span class="hero-index-label">Servicios</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Qué hago</span></a>
+      <a href="#proceso" class="hero-index-row"><span class="hero-index-num mono">04</span><span class="hero-index-label">Proceso</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cómo trabajo</span></a>
+      <a href="#sobre-mi" class="hero-index-row"><span class="hero-index-num mono">05</span><span class="hero-index-label">Sobre mí</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Perfil</span></a>
+      <a href="#faq" class="hero-index-row"><span class="hero-index-num mono">06</span><span class="hero-index-label">FAQ</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Dudas</span></a>
+      <a href="#contacto" class="hero-index-row"><span class="hero-index-num mono">07</span><span class="hero-index-label">Contacto</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cotizar</span></a>
     </nav>
 
     <div class="hero-reel">
@@ -418,11 +430,23 @@ footer{ background:var(--paper-alt); padding-top:0; }
   </div>
 </section>
 
+<!-- ================= REELS: video en loop ================= -->
+<section id="reels" style="background:var(--paper-alt);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">02 — Reels</span>
+      <h2>Reels en loop</h2>
+      <p class="sec-lede">Piezas verticales reproduciéndose automáticamente, tal como se ven en redes sociales.</p>
+    </div>
+    <div class="reel-grid" id="reelGrid"></div>
+  </div>
+</section>
+
 <!-- ================= SERVICIOS ================= -->
 <section id="servicios">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num mono">02 — Servicios</span>
+      <span class="sec-num mono">03 — Servicios</span>
       <h2>En qué te puedo ayudar</h2>
     </div>
     <div class="service-grid" id="serviceGrid"></div>
@@ -433,7 +457,7 @@ footer{ background:var(--paper-alt); padding-top:0; }
 <section id="proceso">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num mono">03 — Proceso</span>
+      <span class="sec-num mono">04 — Proceso</span>
       <h2>Cómo trabajo</h2>
     </div>
     <div class="chain" id="chainList"></div>
@@ -444,7 +468,7 @@ footer{ background:var(--paper-alt); padding-top:0; }
 <section id="sobre-mi">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num mono">04 — Sobre mí</span>
+      <span class="sec-num mono">05 — Sobre mí</span>
       <h2>Perfil</h2>
     </div>
     <div class="about-grid">
@@ -465,7 +489,7 @@ footer{ background:var(--paper-alt); padding-top:0; }
 <section id="faq">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num mono">05 — FAQ</span>
+      <span class="sec-num mono">06 — FAQ</span>
       <h2>Preguntas frecuentes</h2>
     </div>
     <div class="faq-list" id="faqList"></div>
@@ -476,7 +500,7 @@ footer{ background:var(--paper-alt); padding-top:0; }
 <section id="contacto">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-num mono">06 — Contacto</span>
+      <span class="sec-num mono">07 — Contacto</span>
     </div>
     <div class="contact-grid">
       <div>
@@ -709,6 +733,42 @@ function bindWorkPreview(){
   list.addEventListener('mouseleave', ()=>{ preview.classList.remove('is-visible'); running=false; if(raf) cancelAnimationFrame(raf); });
 }
 
+/* ---------- reels en loop ---------- */
+function renderReels(){
+  const grid = document.getElementById('reelGrid');
+  if(!grid) return;
+  const vertical = (state.projects||[]).filter(p=>p.orientation==='vertical' && p.video);
+  if(!vertical.length){ grid.closest('section').classList.add('hidden'); return; }
+  grid.innerHTML = vertical.map(p=>`
+    <div class="reel-card">
+      <div class="reel-body" data-video="${escapeAttr(p.video)}">
+        <div class="reel-loop-tag"><span class="dot"></span>Loop</div>
+        <div class="reel-placeholder mono">Cargando…</div>
+      </div>
+      <div class="reel-info">
+        <span class="reel-title">${escapeHtml(p.title)}</span>
+        <span class="reel-cat mono">${escapeHtml(p.cat||'Reel')}</span>
+      </div>
+    </div>`).join('');
+
+  const bodies = grid.querySelectorAll('.reel-body[data-video]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        if(!el.dataset.loaded){
+          const ph = el.querySelector('.reel-placeholder');
+          if(ph) ph.remove();
+          mountVideoBg(el, el.dataset.video);
+          el.dataset.loaded = '1';
+        }
+        io.unobserve(el);
+      }
+    });
+  }, { rootMargin:'200px', threshold:0.1 });
+  bodies.forEach(b=>io.observe(b));
+}
+
 /* ---------- modal ---------- */
 function openModal(videoUrl, title){
   const overlay = document.getElementById('modalOverlay');
@@ -932,35 +992,6 @@ function bindReveal(){
   els.forEach(el=>io.observe(el));
 }
 
-/* ---------- cursor personalizado ---------- */
-function bindCustomCursor(){
-  const hoverCapable = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if(!hoverCapable) return;
-  document.documentElement.classList.add('has-custom-cursor');
-  const dot = document.createElement('div'); dot.className='cur-dot';
-  const ring = document.createElement('div'); ring.className='cur-ring';
-  document.body.append(dot,ring);
-  let rx=0, ry=0, tx=0, ty=0;
-  window.addEventListener('mousemove', e=>{
-    dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    tx = e.clientX; ty = e.clientY;
-    dot.style.opacity = '1'; ring.style.opacity = '1';
-  });
-  function loop(){ rx += (tx-rx)*0.18; ry += (ty-ry)*0.18; ring.style.transform = `translate(${rx}px, ${ry}px)`; requestAnimationFrame(loop); }
-  loop();
-  document.addEventListener('mouseover', e=>{
-    const overRow = e.target.closest('.work-row');
-    const overLink = e.target.closest('a, button, input, textarea');
-    ring.classList.toggle('is-view', !!overRow);
-    ring.textContent = overRow ? 'Ver' : '';
-    if(overLink && !overRow) ring.classList.add('is-active'); else if(!overRow) ring.classList.remove('is-active');
-  });
-  document.addEventListener('mouseout', e=>{
-    if(e.target.closest('.work-row')){ ring.classList.remove('is-view'); ring.textContent=''; }
-    if(e.target.closest('a, button, input, textarea')) ring.classList.remove('is-active');
-  });
-}
-
 /* ---------- botones magnéticos ---------- */
 function bindMagnetic(){
   const hoverCapable = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -1001,7 +1032,7 @@ function bindMagnetic(){
 
 /* ---------- nav activo al hacer scroll ---------- */
 (function(){
-  const ids = ['trabajo','servicios','proceso','sobre-mi','faq','contacto'];
+  const ids = ['trabajo','reels','servicios','proceso','sobre-mi','faq','contacto'];
   const links = document.querySelectorAll('.nav-links a[data-target]');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
@@ -1020,6 +1051,7 @@ function bindMagnetic(){
     setupHeroReel();
     setupTicker();
     renderWorkIndex();
+    renderReels();
     renderServices();
     renderProcess();
     renderStats();
@@ -1034,7 +1066,6 @@ function bindMagnetic(){
     bindChainNodes();
     bindSpotlight();
     bindWorkPreview();
-    bindCustomCursor();
     bindMagnetic();
     requestAnimationFrame(()=>requestAnimationFrame(()=>{ document.getElementById('hero').classList.add('ready'); }));
   }catch(e){
