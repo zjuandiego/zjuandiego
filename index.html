@@ -139,16 +139,6 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 #hero.ready .hero-actions{ opacity:1; transform:translateY(0); }
 
 /* ---------- índice del hero ---------- */
-.hero-index{ margin-top:56px; border-top:1px solid rgba(236,238,230,.1); opacity:0; transition:opacity .7s ease; transition-delay:.6s; }
-#hero.ready .hero-index{ opacity:1; }
-.hero-index-row{ display:flex; align-items:flex-end; gap:14px; padding:16px 0; border-bottom:1px solid rgba(236,238,230,.1); color:var(--ink-soft); transition:color .25s ease, padding-left .3s var(--ease); }
-.hero-index-row:hover{ color:var(--ink); padding-left:10px; }
-.hero-index-num{ color:var(--red); font-size:12px; font-weight:700; flex-shrink:0; width:20px; }
-.hero-index-label{ flex-shrink:0; font-size:15px; font-weight:800; letter-spacing:-.01em; text-transform:uppercase; }
-.hero-index-leader{ flex:1; height:0; min-width:16px; border-bottom:1px dotted rgba(236,238,230,.28); margin-bottom:6px; transition:border-color .25s ease; }
-.hero-index-row:hover .hero-index-leader{ border-color:var(--red); }
-.hero-index-tag{ flex-shrink:0; font-size:11px; color:var(--ink-soft); opacity:.8; }
-@media (max-width:560px){ .hero-index-tag{ display:none; } .hero-index-label{ font-size:13px; } }
 
 /* ---------- video destacado del hero ---------- */
 .hero-reel{ margin-top:70px; position:relative; opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s var(--ease); transition-delay:.25s; }
@@ -390,15 +380,6 @@ footer{ background:var(--paper-alt); padding-top:0; }
       </div>
     </div>
 
-    <nav class="hero-index" aria-label="Secciones del sitio">
-      <a href="#trabajo" class="hero-index-row"><span class="hero-index-num mono">01</span><span class="hero-index-label">Trabajo</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Proyectos</span></a>
-      <a href="#reels" class="hero-index-row"><span class="hero-index-num mono">02</span><span class="hero-index-label">Reels</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">En loop</span></a>
-      <a href="#servicios" class="hero-index-row"><span class="hero-index-num mono">03</span><span class="hero-index-label">Servicios</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Qué hago</span></a>
-      <a href="#proceso" class="hero-index-row"><span class="hero-index-num mono">04</span><span class="hero-index-label">Proceso</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cómo trabajo</span></a>
-      <a href="#sobre-mi" class="hero-index-row"><span class="hero-index-num mono">05</span><span class="hero-index-label">Sobre mí</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Perfil</span></a>
-      <a href="#faq" class="hero-index-row"><span class="hero-index-num mono">06</span><span class="hero-index-label">FAQ</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Dudas</span></a>
-      <a href="#contacto" class="hero-index-row"><span class="hero-index-num mono">07</span><span class="hero-index-label">Contacto</span><span class="hero-index-leader"></span><span class="hero-index-tag mono">Cotizar</span></a>
-    </nav>
 
     <div class="hero-reel">
       <div class="hero-reel-frame">
